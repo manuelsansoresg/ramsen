@@ -41,7 +41,7 @@ if (!prefersReducedMotion) {
             .to('.section-2-title-line', { autoAlpha: 1, y: 0, duration: 1.05, stagger: .16 }, .28)
             .to('.section-2-copy', { autoAlpha: 1, x: 0, duration: 1.15 }, .82)
             .to('.section-2-image', {
-                autoAlpha: .22,
+                autoAlpha: 1,
                 scale: 1,
                 duration: 1.35,
                 ease: 'power2.out',

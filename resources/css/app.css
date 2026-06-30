@@ -284,17 +284,18 @@
     .section-2-inner {
         position: relative;
         z-index: 1;
-        width: min(100% - 10rem, 1472px);
+        width: min(100% - 12.5rem, 1578px);
         margin-inline: auto;
         display: grid;
-        grid-template-columns: minmax(0, 1.03fr) 1px minmax(520px, .88fr);
+        grid-template-columns: minmax(660px, 742px) 1px minmax(560px, 640px);
         align-items: center;
-        column-gap: 5rem;
-        padding-block: 7.5rem;
+        column-gap: 5.65rem;
+        padding-block: 7.75rem;
     }
 
     .section-2-glow {
         position: absolute;
+        z-index: 0;
         right: 7%;
         top: 24%;
         width: min(38vw, 38rem);
@@ -309,6 +310,7 @@
     .section-2-particles {
         position: absolute;
         inset: 0;
+        z-index: 0;
         pointer-events: none;
         opacity: .28;
         background-image:
@@ -320,10 +322,10 @@
     }
 
     .section-2-content .section-title {
-        margin-top: 1.55rem;
-        max-width: 760px;
-        font-size: clamp(4.4rem, 5.6vw, 6.7rem);
-        line-height: 1.075;
+        margin-top: 1.75rem;
+        max-width: 720px;
+        font-size: clamp(4.35rem, 4.32vw, 5.35rem);
+        line-height: 1.18;
         text-transform: uppercase;
     }
 
@@ -334,7 +336,7 @@
     .gold-divider,
     .section-2-divider {
         width: 1px;
-        min-height: 26rem;
+        min-height: 25.75rem;
         background: rgba(197, 164, 93, .72);
         justify-self: center;
         transform-origin: top;
@@ -343,13 +345,13 @@
     .section-2-rule {
         width: 5.2rem;
         height: 1px;
-        margin-top: 3.2rem;
+        margin-top: 3.05rem;
         background: var(--color-gold);
     }
 
     .section-2-copy {
         margin-top: -3px;
-        margin-left: min(19rem, 42%);
+        margin-left: 22.1rem;
         max-width: 28rem;
         color: rgba(255, 247, 232, .78);
         font-size: clamp(1.1rem, 1.4vw, 1.35rem);
@@ -375,6 +377,7 @@
         box-shadow: 0 34px 110px rgba(0, 0, 0, .34);
         object-fit: cover;
         object-position: center center;
+        opacity: 1;
         will-change: transform;
     }
 
