@@ -1832,6 +1832,7 @@
         .section-2-copy {
             margin-left: 0;
             margin-top: 2rem;
+            max-width: 100%;
         }
 
         .masonry-gallery {
@@ -1893,6 +1894,17 @@
             max-width: 10ch;
             font-size: clamp(3.25rem, 16vw, 4.75rem);
             line-height: .94;
+        }
+
+        .section-2-content .section-title {
+            max-width: 100%;
+            font-size: clamp(2.45rem, 10.5vw, 3.35rem);
+            line-height: 1.12;
+        }
+
+        .section-2-copy {
+            font-size: 1rem;
+            line-height: 1.75;
         }
 
         .hero-photo img {
