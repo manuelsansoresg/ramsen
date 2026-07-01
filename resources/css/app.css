@@ -175,15 +175,304 @@
         mix-blend-mode: screen;
     }
 
+    .hero-bokeh {
+        z-index: 1;
+        pointer-events: none;
+        overflow: hidden;
+        mix-blend-mode: screen;
+        opacity: .9;
+    }
+
+    .hero-bokeh span {
+        position: absolute;
+        display: block;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(255, 247, 232, .62), rgba(222, 198, 112, .24) 42%, rgba(107, 154, 99, .12) 68%, transparent 100%);
+        filter: blur(18px);
+        opacity: .07;
+        animation: heroBokehDrift 18s ease-in-out infinite;
+        --bokeh-x1: 0px;
+        --bokeh-y1: 0px;
+        --bokeh-x2: 18px;
+        --bokeh-y2: -24px;
+        --bokeh-x3: -10px;
+        --bokeh-y3: 12px;
+        will-change: transform, opacity;
+    }
+
+    .hero-bokeh span:nth-child(1) {
+        left: 28%;
+        top: 12%;
+        width: 58px;
+        height: 58px;
+        animation-duration: 22s;
+        animation-delay: -3s;
+        --bokeh-x2: 26px;
+        --bokeh-y2: -28px;
+        --bokeh-x3: -14px;
+        --bokeh-y3: 18px;
+    }
+
+    .hero-bokeh span:nth-child(2) {
+        left: 39%;
+        top: 21%;
+        width: 34px;
+        height: 34px;
+        animation-duration: 16s;
+        animation-delay: -8s;
+        filter: blur(16px);
+        --bokeh-x2: -22px;
+        --bokeh-y2: 18px;
+        --bokeh-x3: 14px;
+        --bokeh-y3: -10px;
+    }
+
+    .hero-bokeh span:nth-child(3) {
+        left: 52%;
+        top: 15%;
+        width: 48px;
+        height: 48px;
+        animation-duration: 25s;
+        animation-delay: -11s;
+        --bokeh-x2: 32px;
+        --bokeh-y2: 14px;
+        --bokeh-x3: -18px;
+        --bokeh-y3: -20px;
+    }
+
+    .hero-bokeh span:nth-child(4) {
+        left: 66%;
+        top: 26%;
+        width: 24px;
+        height: 24px;
+        animation-duration: 14s;
+        animation-delay: -5s;
+        opacity: .06;
+        filter: blur(13px);
+        --bokeh-x2: -16px;
+        --bokeh-y2: -22px;
+        --bokeh-x3: 12px;
+        --bokeh-y3: 16px;
+    }
+
+    .hero-bokeh span:nth-child(5) {
+        left: 74%;
+        top: 18%;
+        width: 42px;
+        height: 42px;
+        animation-duration: 21s;
+        animation-delay: -14s;
+        --bokeh-x2: 24px;
+        --bokeh-y2: -16px;
+        --bokeh-x3: -20px;
+        --bokeh-y3: 22px;
+    }
+
+    .hero-bokeh span:nth-child(6) {
+        left: 58%;
+        top: 42%;
+        width: 18px;
+        height: 18px;
+        animation-duration: 12s;
+        animation-delay: -2s;
+        opacity: .05;
+        filter: blur(11px);
+        --bokeh-x2: 18px;
+        --bokeh-y2: 20px;
+        --bokeh-x3: -12px;
+        --bokeh-y3: -18px;
+    }
+
+    .hero-bokeh span:nth-child(7) {
+        left: 47%;
+        top: 33%;
+        width: 60px;
+        height: 60px;
+        animation-duration: 24s;
+        animation-delay: -17s;
+        opacity: .08;
+        filter: blur(22px);
+        --bokeh-x2: -30px;
+        --bokeh-y2: 22px;
+        --bokeh-x3: 20px;
+        --bokeh-y3: -24px;
+    }
+
+    .hero-bokeh span:nth-child(8) {
+        left: 82%;
+        top: 37%;
+        width: 28px;
+        height: 28px;
+        animation-duration: 18s;
+        animation-delay: -9s;
+        opacity: .06;
+        filter: blur(14px);
+        --bokeh-x2: -20px;
+        --bokeh-y2: -18px;
+        --bokeh-x3: 14px;
+        --bokeh-y3: 20px;
+    }
+
+    .hero-bokeh span:nth-child(9) {
+        left: 34%;
+        top: 43%;
+        width: 20px;
+        height: 20px;
+        animation-duration: 15s;
+        animation-delay: -6s;
+        filter: blur(12px);
+        --bokeh-x2: 16px;
+        --bokeh-y2: -14px;
+        --bokeh-x3: -18px;
+        --bokeh-y3: 10px;
+    }
+
+    .hero-bokeh span:nth-child(10) {
+        left: 62%;
+        top: 8%;
+        width: 12px;
+        height: 12px;
+        animation-duration: 10s;
+        animation-delay: -1s;
+        opacity: .05;
+        filter: blur(9px);
+        --bokeh-x2: -14px;
+        --bokeh-y2: 12px;
+        --bokeh-x3: 16px;
+        --bokeh-y3: -16px;
+    }
+
+    .hero-bokeh span:nth-child(11) {
+        left: 71%;
+        top: 51%;
+        width: 36px;
+        height: 36px;
+        animation-duration: 20s;
+        animation-delay: -12s;
+        opacity: .07;
+        --bokeh-x2: 28px;
+        --bokeh-y2: 18px;
+        --bokeh-x3: -16px;
+        --bokeh-y3: -22px;
+    }
+
+    .hero-bokeh span:nth-child(12) {
+        left: 43%;
+        top: 7%;
+        width: 46px;
+        height: 46px;
+        animation-duration: 23s;
+        animation-delay: -19s;
+        opacity: .08;
+        --bokeh-x2: -26px;
+        --bokeh-y2: -20px;
+        --bokeh-x3: 18px;
+        --bokeh-y3: 14px;
+    }
+
+    @keyframes heroBokehDrift {
+        0% {
+            opacity: .05;
+            transform: translate3d(var(--bokeh-x1), var(--bokeh-y1), 0) scale(1);
+        }
+
+        35% {
+            opacity: .11;
+            transform: translate3d(var(--bokeh-x2), var(--bokeh-y2), 0) scale(1.05);
+        }
+
+        70% {
+            opacity: .07;
+            transform: translate3d(calc(var(--bokeh-x3) * .7), calc(var(--bokeh-y3) * .7), 0) scale(.99);
+        }
+
+        100% {
+            opacity: .06;
+            transform: translate3d(var(--bokeh-x3), var(--bokeh-y3), 0) scale(1.02);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .hero-bokeh span,
+        .particle-field {
+            animation: none;
+            transform: none;
+        }
+
+        .hero-bokeh span {
+            opacity: .06;
+        }
+
+        .particle-field {
+            opacity: .1;
+        }
+    }
+
     .particle-field {
-        opacity: .18;
+        opacity: .28;
         background-image:
-            radial-gradient(circle, rgba(255, 247, 232, .86) 0 1px, transparent 1.5px),
-            radial-gradient(circle, rgba(72, 213, 205, .64) 0 1px, transparent 1.5px);
-        background-position: 0 0, 26px 44px;
-        background-size: 92px 92px, 138px 138px;
-        mask-image: linear-gradient(90deg, transparent, black 24%, black 78%, transparent);
-        will-change: transform;
+            radial-gradient(circle at 13% 22%, rgba(255, 247, 232, .9) 0 1.4px, transparent 2.2px),
+            radial-gradient(circle at 27% 68%, rgba(72, 213, 205, .72) 0 1.3px, transparent 2.1px),
+            radial-gradient(circle at 39% 31%, rgba(255, 247, 232, .78) 0 1.2px, transparent 2px),
+            radial-gradient(circle at 54% 74%, rgba(197, 164, 93, .68) 0 1.4px, transparent 2.2px),
+            radial-gradient(circle at 68% 43%, rgba(255, 247, 232, .82) 0 1.2px, transparent 2px),
+            radial-gradient(circle at 78% 18%, rgba(72, 213, 205, .64) 0 1.3px, transparent 2.1px),
+            radial-gradient(circle at 88% 63%, rgba(255, 247, 232, .7) 0 1.2px, transparent 2px),
+            radial-gradient(circle at 7% 81%, rgba(197, 164, 93, .62) 0 1.4px, transparent 2.2px),
+            radial-gradient(circle, rgba(255, 247, 232, .58) 0 1.2px, transparent 2px),
+            radial-gradient(circle, rgba(72, 213, 205, .46) 0 1.2px, transparent 2px);
+        background-position:
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            0 0,
+            17px 29px,
+            63px 11px;
+        background-size:
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            100% 100%,
+            173px 149px,
+            241px 197px;
+        filter: drop-shadow(0 0 5px rgba(255, 247, 232, .18));
+        mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+        animation: heroAirParticles 26s ease-in-out infinite alternate;
+        will-change: transform, opacity, background-position;
+    }
+
+    @keyframes heroAirParticles {
+        0% {
+            opacity: .2;
+            background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 17px 29px, 63px 11px;
+            transform: translate3d(0, 0, 0);
+        }
+
+        35% {
+            opacity: .34;
+            background-position: 5px -7px, -8px 4px, 10px 6px, -4px -9px, 7px 3px, -6px -5px, 4px 8px, -10px 3px, 38px 12px, 81px -4px;
+            transform: translate3d(6px, -8px, 0);
+        }
+
+        70% {
+            opacity: .25;
+            background-position: -6px -14px, 7px -8px, -11px 10px, 6px -4px, -9px 11px, 8px -12px, -7px 5px, 11px -8px, 28px -9px, 96px -22px;
+            transform: translate3d(-5px, -14px, 0);
+        }
+
+        100% {
+            opacity: .3;
+            background-position: 12px -21px, -14px -10px, 18px 14px, -11px -17px, 14px 9px, -13px -18px, 9px 16px, -16px -6px, 52px -27px, 119px -39px;
+            transform: translate3d(8px, -20px, 0);
+        }
     }
 
     .hero-title {
@@ -1566,6 +1855,10 @@
                 radial-gradient(circle at 45% 18%, rgba(197, 164, 93, .12), transparent 16rem),
                 linear-gradient(180deg, rgba(5, 10, 8, .28) 0%, rgba(5, 10, 8, .18) 34%, rgba(5, 10, 8, .86) 74%, rgba(5, 10, 8, .95) 100%),
                 linear-gradient(90deg, rgba(5, 10, 8, .72), rgba(5, 10, 8, .18), rgba(5, 10, 8, .38));
+        }
+
+        .hero-bokeh span:nth-child(n+5) {
+            display: none;
         }
 
         .premium-button,

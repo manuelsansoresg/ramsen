@@ -55,6 +55,11 @@
         </picture>
         <div class="hero-depth absolute inset-0"></div>
         <div class="ambient-light absolute inset-0"></div>
+        <div class="hero-bokeh absolute inset-0" aria-hidden="true">
+            @for ($i = 1; $i <= 40; $i++)
+                <span></span>
+            @endfor
+        </div>
         <div class="particle-field absolute inset-0" aria-hidden="true"></div>
         <div class="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl items-end px-5 pb-12 pt-36 lg:px-8 lg:pb-20">
             <div class="hero-copy max-w-[760px]">
@@ -73,7 +78,6 @@
     </section>
 
     <section id="filosofia" class="section-2 section-ambient">
-        <div class="section-2-particles" aria-hidden="true"></div>
         <div class="section-2-glow" aria-hidden="true"></div>
         <div class="section-2-inner">
             <div class="section-2-content">
@@ -110,7 +114,6 @@
                     <article class="service-card {{ $item[3] }}">
                         <div class="service-card-image" aria-hidden="true"></div>
                         <div class="service-card-shade" aria-hidden="true"></div>
-                        <div class="service-card-particles" aria-hidden="true"></div>
                         <div class="service-card-glow" aria-hidden="true"></div>
                         <svg viewBox="0 0 24 24" class="service-icon" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="{{ $item[4] }}" />

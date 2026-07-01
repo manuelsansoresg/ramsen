@@ -73,15 +73,6 @@ if (!prefersReducedMotion) {
             ease: 'sine.inOut',
         });
 
-        gsap.to('.section-2-particles', {
-            xPercent: 1.5,
-            yPercent: -2,
-            duration: 18,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-        });
-
         ScrollTrigger.matchMedia({
             '(min-width: 1024px)': () => {
                 const image = section2.querySelector('.section-2-image-shell');
@@ -149,14 +140,6 @@ if (!prefersReducedMotion) {
             .to('.service-card', { autoAlpha: 1, y: 0, scale: 1, stagger: .09 }, .58)
             .to('.services-cta', { autoAlpha: 1, y: 0, onComplete: startServiceBreathing }, .95);
 
-        gsap.to('.service-card-particles', {
-            xPercent: 2,
-            yPercent: -2,
-            duration: 16,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-        });
     }
 
     const upcomingEvents = document.querySelector('.upcoming-events');
@@ -240,18 +223,6 @@ if (!prefersReducedMotion) {
     gsap.to('.hero-photo', {
         scale: 1,
         yPercent: 8,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '.hero-scene',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-        },
-    });
-
-    gsap.to('.particle-field', {
-        yPercent: -8,
-        xPercent: 2,
         ease: 'none',
         scrollTrigger: {
             trigger: '.hero-scene',
