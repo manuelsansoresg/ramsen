@@ -394,7 +394,8 @@
 
     @media (prefers-reduced-motion: reduce) {
         .hero-bokeh span,
-        .particle-field {
+        .particle-field,
+        .ambient-audio-button.is-playing span:first-child {
             animation: none;
             transform: none;
         }
@@ -551,6 +552,54 @@
     .secondary-button:hover {
         transform: translateY(-4px);
         box-shadow: 0 28px 85px rgba(0, 0, 0, .36);
+    }
+
+    .ambient-audio-button {
+        display: inline-flex;
+        align-items: center;
+        gap: .55rem;
+        min-height: 2.65rem;
+        border: 1px solid rgba(255, 247, 232, .18);
+        border-radius: 999px;
+        background: rgba(5, 10, 8, .24);
+        color: rgba(255, 247, 232, .72);
+        font-size: .72rem;
+        font-weight: 900;
+        letter-spacing: .14em;
+        padding: 0 1rem;
+        text-transform: uppercase;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, .18);
+        transition: border-color .3s ease, background .3s ease, color .3s ease, transform .3s ease;
+    }
+
+    .ambient-audio-button:hover {
+        border-color: rgba(197, 164, 93, .42);
+        background: rgba(5, 10, 8, .38);
+        color: var(--color-warm);
+        transform: translateY(-2px);
+    }
+
+    .ambient-audio-button span:first-child {
+        display: inline-grid;
+        place-items: center;
+    }
+
+    .ambient-audio-button.is-playing span:first-child {
+        animation: ambientAudioPulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes ambientAudioPulse {
+        0%,
+        100% {
+            opacity: .72;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 1;
+            transform: scale(1.12);
+        }
     }
 
     .section-2,

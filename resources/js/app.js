@@ -9,6 +9,57 @@ gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const ambientAudio = document.querySelector('#heroAmbientAudio');
+const ambientToggle = document.querySelector('#heroAmbientToggle');
+const ambientToggleText = ambientToggle?.querySelector('.ambient-audio-text');
+
+if (ambientAudio && ambientToggle && ambientToggleText) {
+    ambientAudio.volume = 0.18;
+
+    const setAudioState = (isPlaying) => {
+        ambientToggle.classList.toggle('is-playing', isPlaying);
+        ambientToggle.setAttribute('aria-label', isPlaying ? 'Pausar sonido ambiental' : 'Reproducir sonido ambiental');
+        ambientToggle.firstElementChild.textContent = isPlaying ? '⏸' : '🌿';
+        ambientToggleText.textContent = isPlaying ? 'Pausar ambiente' : 'Escuchar ambiente';
+    };
+
+    const playAmbient = async (savePreference = true) => {
+        try {
+            await ambientAudio.play();
+            setAudioState(true);
+
+            if (savePreference) {
+                localStorage.setItem('santuarioAudioPaused', 'false');
+            }
+        } catch (error) {
+            setAudioState(false);
+        }
+    };
+
+    const pauseAmbient = (savePreference = true) => {
+        ambientAudio.pause();
+        setAudioState(false);
+
+        if (savePreference) {
+            localStorage.setItem('santuarioAudioPaused', 'true');
+        }
+    };
+
+    ambientToggle.addEventListener('click', () => {
+        if (ambientAudio.paused) {
+            playAmbient();
+        } else {
+            pauseAmbient();
+        }
+    });
+
+    if (localStorage.getItem('santuarioAudioPaused') === 'true') {
+        setAudioState(false);
+    } else {
+        playAmbient(false);
+    }
+}
+
 if (!prefersReducedMotion) {
     gsap.set('.reveal, .reveal-line, .reveal-card, .reveal-image', { autoAlpha: 0, y: 34 });
     gsap.set('.reveal-title', { autoAlpha: 0, y: 46, filter: 'blur(10px)' });

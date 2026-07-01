@@ -70,6 +70,13 @@
                     <a href="{{ $waUrl }}" target="_blank" class="premium-button magnetic-button">Iniciar mi experiencia</a>
                     <a href="#filosofia" class="secondary-button magnetic-button">Conocer más</a>
                 </div>
+                <div class="reveal mt-5">
+                    <audio id="heroAmbientAudio" src="{{ asset('santuario-ambiente.mp3') }}" preload="auto" loop></audio>
+                    <button id="heroAmbientToggle" type="button" class="ambient-audio-button" aria-label="Reproducir sonido ambiental">
+                        <span aria-hidden="true">🌿</span>
+                        <span class="ambient-audio-text">Escuchar ambiente</span>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="absolute bottom-8 right-5 z-10 hidden max-w-xs border-l border-gold/35 pl-5 text-sm leading-7 text-warm/62 md:block">
