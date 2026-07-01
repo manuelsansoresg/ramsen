@@ -17,6 +17,14 @@ if (!prefersReducedMotion) {
     gsap.set('.section-2-copy', { autoAlpha: 0, x: 18 });
     gsap.set('.section-2-divider', { scaleY: 0 });
     gsap.set('.section-2-image', { autoAlpha: 0, scale: .96, y: 0 });
+    gsap.set('.services-label, .services-subtitle, .services-cta', { autoAlpha: 0, y: 18 });
+    gsap.set('.services-title-line', { autoAlpha: 0, y: 30 });
+    gsap.set('.service-card', { autoAlpha: 0, y: 40, scale: .97 });
+    gsap.set('.upcoming-events-label, .upcoming-events-title, .upcoming-events-copy', { autoAlpha: 0, y: 28 });
+    gsap.set('.event-card, .event-empty', { autoAlpha: 0, y: 50 });
+    gsap.set('.testimonials-label, .testimonials-intro, .testimonials-cta', { autoAlpha: 0, y: 18 });
+    gsap.set('.testimonials-title span', { autoAlpha: 0, y: 28 });
+    gsap.set('.testimonial-slide', { autoAlpha: 0, y: 40 });
 
     gsap.timeline({ defaults: { ease: 'power3.out' } })
         .to('.reveal-line', { autoAlpha: 1, y: 0, duration: .9 }, .2)
@@ -107,6 +115,84 @@ if (!prefersReducedMotion) {
                 };
             },
         });
+    }
+
+    const servicesSection = document.querySelector('.services-section');
+
+    if (servicesSection) {
+        const startServiceBreathing = () => {
+            gsap.to('.service-card', {
+                scale: 1.01,
+                duration: 10,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                stagger: {
+                    each: .35,
+                    repeat: -1,
+                    yoyo: true,
+                },
+            });
+        };
+
+        gsap.timeline({
+            defaults: { duration: .72, ease: 'power2.out' },
+            scrollTrigger: {
+                trigger: servicesSection,
+                start: 'top 72%',
+                once: true,
+            },
+        })
+            .to('.services-label', { autoAlpha: 1, y: 0 })
+            .to('.services-title-line', { autoAlpha: 1, y: 0, stagger: .12 }, .12)
+            .to('.services-subtitle', { autoAlpha: 1, y: 0 }, .38)
+            .to('.service-card', { autoAlpha: 1, y: 0, scale: 1, stagger: .09 }, .58)
+            .to('.services-cta', { autoAlpha: 1, y: 0, onComplete: startServiceBreathing }, .95);
+
+        gsap.to('.service-card-particles', {
+            xPercent: 2,
+            yPercent: -2,
+            duration: 16,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+        });
+    }
+
+    const upcomingEvents = document.querySelector('.upcoming-events');
+
+    if (upcomingEvents) {
+        gsap.timeline({
+            defaults: { duration: .78, ease: 'power2.out' },
+            scrollTrigger: {
+                trigger: upcomingEvents,
+                start: 'top 72%',
+                once: true,
+            },
+        })
+            .to('.upcoming-events-label', { autoAlpha: 1, y: 0 })
+            .to('.upcoming-events-title', { autoAlpha: 1, y: 0 }, .12)
+            .to('.upcoming-events-copy', { autoAlpha: 1, y: 0 }, .28)
+            .to('.event-card', { autoAlpha: 1, y: 0, stagger: .16 }, .5)
+            .to('.event-empty', { autoAlpha: 1, y: 0 }, .5);
+    }
+
+    const testimonialsSection = document.querySelector('.testimonials-section');
+
+    if (testimonialsSection) {
+        gsap.timeline({
+            defaults: { duration: .82, ease: 'power2.out' },
+            scrollTrigger: {
+                trigger: testimonialsSection,
+                start: 'top 72%',
+                once: true,
+            },
+        })
+            .to('.testimonials-label', { autoAlpha: 1, y: 0 })
+            .to('.testimonials-title span', { autoAlpha: 1, y: 0, stagger: .13 }, .12)
+            .to('.testimonials-intro', { autoAlpha: 1, y: 0, duration: .72 }, .34)
+            .to('.testimonial-slide', { autoAlpha: 1, y: 0, stagger: .12 }, .58)
+            .to('.testimonials-cta', { autoAlpha: 1, y: 0 }, .9);
     }
 
     gsap.utils.toArray('.reveal').forEach((element) => {
@@ -219,10 +305,86 @@ if (!prefersReducedMotion) {
             gsap.to(button, { x: 0, y: 0, duration: .5, ease: 'elastic.out(1, .45)' });
         });
     });
+
+    document.querySelectorAll('.testimonials-carousel').forEach((carousel) => {
+        const shell = carousel.closest('.testimonials-carousel-shell');
+        const dots = shell ? Array.from(shell.querySelectorAll('.testimonial-dots button')) : [];
+        const slides = Array.from(carousel.querySelectorAll('.testimonial-slide'));
+        let isDown = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        let scrollTimeout;
+
+        const getStep = () => {
+            const slide = slides[0];
+            if (!slide) return carousel.clientWidth;
+
+            const style = window.getComputedStyle(carousel);
+            return slide.offsetWidth + parseFloat(style.columnGap || style.gap || 0);
+        };
+
+        const getVisibleCount = () => {
+            if (window.matchMedia('(max-width: 640px)').matches) return 1;
+            if (window.matchMedia('(max-width: 900px)').matches) return 2;
+            return 4;
+        };
+
+        const updateDots = () => {
+            const step = getStep();
+            const index = Math.round(carousel.scrollLeft / (step * getVisibleCount()));
+
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('is-active', dotIndex === index);
+            });
+        };
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                carousel.scrollTo({
+                    left: getStep() * getVisibleCount() * index,
+                    behavior: 'smooth',
+                });
+            });
+        });
+
+        carousel.addEventListener('scroll', () => {
+            window.clearTimeout(scrollTimeout);
+            scrollTimeout = window.setTimeout(updateDots, 60);
+        });
+
+        carousel.addEventListener('pointerdown', (event) => {
+            if (event.pointerType === 'touch') return;
+
+            isDown = true;
+            startX = event.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+            carousel.classList.add('is-dragging');
+            carousel.setPointerCapture(event.pointerId);
+        });
+
+        carousel.addEventListener('pointermove', (event) => {
+            if (!isDown) return;
+
+            event.preventDefault();
+            const x = event.pageX - carousel.offsetLeft;
+            carousel.scrollLeft = scrollLeft - (x - startX);
+        });
+
+        const stopDragging = () => {
+            isDown = false;
+            carousel.classList.remove('is-dragging');
+        };
+
+        carousel.addEventListener('pointerup', stopDragging);
+        carousel.addEventListener('pointercancel', stopDragging);
+        carousel.addEventListener('mouseleave', stopDragging);
+        updateDots();
+    });
 } else {
-    document.querySelectorAll('.reveal, .reveal-line, .reveal-title, .reveal-card, .reveal-image, .section-2-label, .section-2-title-line, .section-2-copy, .section-2-image').forEach((element) => {
+    document.querySelectorAll('.reveal, .reveal-line, .reveal-title, .reveal-card, .reveal-image, .section-2-label, .section-2-title-line, .section-2-copy, .section-2-image, .services-label, .services-title-line, .services-subtitle, .service-card, .services-cta, .upcoming-events-label, .upcoming-events-title, .upcoming-events-copy, .event-card, .event-empty, .testimonials-label, .testimonials-title span, .testimonials-intro, .testimonial-slide, .testimonials-cta').forEach((element) => {
         element.style.opacity = 1;
         element.style.visibility = 'visible';
+        element.style.transform = 'none';
     });
 
     document.querySelectorAll('.section-2-divider').forEach((element) => {
