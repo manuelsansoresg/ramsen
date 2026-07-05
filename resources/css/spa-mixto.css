@@ -382,7 +382,7 @@
 /* ═══════════════ DAY SELECTOR ═══════════════ */
 .mixto-days {
     position: relative;
-    padding: clamp(4rem, 8vh, 6rem) 0;
+    padding: clamp(2.5rem, 5vh, 4rem) 0 clamp(2rem, 4vh, 3rem);
     background: linear-gradient(180deg, var(--mix-ink) 0%, var(--mix-forest) 50%, var(--mix-ink) 100%);
 }
 
@@ -517,12 +517,12 @@
 
 /* ═══════════════ TIMELINE ═══════════════ */
 .mixto-timeline {
-    padding: clamp(4rem, 9vh, 7rem) 0;
+    padding: clamp(2.5rem, 5vh, 4rem) 0 clamp(1.5rem, 3vh, 2.5rem);
 }
 
 .mixto-timeline__head {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2.25rem;
 }
 
 .mixto-timeline__sub {
@@ -645,12 +645,12 @@
 
 /* ═══════════════ SERVICIOS INCLUIDOS ═══════════════ */
 .mixto-services {
-    padding: clamp(4rem, 9vh, 7rem) 0;
+    padding: clamp(2rem, 4vh, 3rem) 0 clamp(2.5rem, 5vh, 4rem);
 }
 
 .mixto-services__head {
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .mixto-services__sub {
@@ -671,6 +671,8 @@
     position: relative;
     overflow: hidden;
     isolation: isolate;
+    display: flex;
+    flex-direction: column;
     padding: 2rem 1.75rem 1.75rem;
     min-height: 22rem;
     border-radius: 18px;
@@ -777,9 +779,10 @@
 
 .mixto-service__title {
     margin: .8rem 0 0;
+    padding-right: 3.25rem; /* reserva espacio para el icono absolute (2.5rem + aire) */
     font-family: var(--font-display);
-    font-size: clamp(1.55rem, 2.2vw, 1.95rem);
-    line-height: 1.1;
+    font-size: clamp(1.35rem, 1.9vw, 1.65rem);
+    line-height: 1.15;
     color: var(--mx-warm);
     text-wrap: balance;
 }
@@ -793,7 +796,8 @@
 
 .mixto-service__nota {
     display: inline-block;
-    margin-top: 1.25rem;
+    align-self: flex-start;          /* no estirar la pill */
+    margin-top: auto;                /* empuja al fondo de la card */
     padding: .35rem .75rem;
     border-radius: 999px;
     border: 1px dashed rgba(197, 164, 93, .35);
@@ -826,12 +830,12 @@
 
 /* ═══════════════ SERVICIOS EXTRAS ═══════════════ */
 .mixto-extras {
-    padding: clamp(4rem, 9vh, 7rem) 0;
+    padding: clamp(2rem, 4vh, 3rem) 0 clamp(2.5rem, 5vh, 4rem);
 }
 
 .mixto-extras__head {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2.25rem;
 }
 
 .mixto-extras__sub {
@@ -999,7 +1003,7 @@
 
 /* ═══════════════ PREPARACIÓN (qué traer + reglas) ═══════════════ */
 .mixto-prep {
-    padding: clamp(4rem, 9vh, 7rem) 0;
+    padding: clamp(2rem, 4vh, 3rem) 0 clamp(2.5rem, 5vh, 4rem);
 }
 
 .mixto-prep__grid {
@@ -1053,25 +1057,7 @@
     border-radius: 12px;
     background: rgba(5, 10, 8, .35);
     border: 1px solid rgba(255, 247, 232, .08);
-    cursor: pointer;
-    transition: all .25s var(--mx-ease);
-    user-select: none;
-}
-
-.mixto-checklist__item:hover {
-    border-color: rgba(197, 164, 93, .3);
-    transform: translateX(2px);
-}
-
-.mixto-checklist__item.is-checked .mixto-checklist__label {
-    color: var(--mx-warm-50);
-    text-decoration: line-through;
-}
-
-.mixto-checklist__item.is-checked .mixto-checklist__box {
-    background: var(--mx-gold);
-    border-color: var(--mx-gold);
-    color: var(--mix-ink);
+    /* sin cursor pointer, sin hover translate: es solo visual */
 }
 
 .mixto-checklist__box {
@@ -1081,10 +1067,9 @@
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 6px;
-    border: 1.5px solid rgba(197, 164, 93, .35);
-    background: transparent;
-    color: transparent;
-    transition: all .25s var(--mx-ease);
+    border: 1.5px solid var(--mx-gold);
+    background: rgba(197, 164, 93, .12);
+    color: var(--mx-gold);
     flex-shrink: 0;
 }
 
@@ -1567,6 +1552,10 @@
         right: 1.5rem;
         width: 2rem;
         height: 2rem;
+    }
+
+    .mixto-service__title {
+        padding-right: 2.75rem; /* icono absolute en mobile: 2rem + aire */
     }
 
     .mixto-extra {

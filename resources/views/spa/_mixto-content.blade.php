@@ -278,7 +278,7 @@
                 <h3 class="mixto-prep__title">Tu kit para el santuario</h3>
                 <ul class="mixto-checklist">
                     @foreach ($queTraer as $item)
-                        <li class="mixto-checklist__item" x-data="{ checked: false }" x-on:click="checked = !checked" :class="{ 'is-checked': checked }">
+                        <li class="mixto-checklist__item">
                             <span class="mixto-checklist__box" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>
                             </span>
