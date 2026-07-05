@@ -11,6 +11,8 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/css/spa-select.css',
                 'resources/js/spa-select.js',
+                'resources/css/spa-mixto.css',
+                'resources/js/spa-mixto.js',
             ],
             refresh: true,
             fonts: [

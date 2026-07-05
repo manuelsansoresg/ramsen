@@ -44,8 +44,12 @@
     <script type="application/ld+json">{!! json_encode($localBusinessSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @stack('styles')
 </head>
 <body class="bg-ink text-warm antialiased">
     @yield('content')
+
+    @stack('scripts')
 </body>
 </html>

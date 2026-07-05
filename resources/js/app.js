@@ -3,7 +3,21 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 window.Alpine = Alpine;
-Alpine.start();
+
+/*
+   Si la página renderizó contenido mixto (cargado condicionalmente en
+   la vista cuando llega ?experiencia=mixto), esperamos al siguiente
+   tick del event loop antes de iniciar Alpine. Esto garantiza que
+   spa-mixto.js (cargado justo después en el documento) haya tenido
+   oportunidad de registrar su componente `mixtoPage` con Alpine.data()
+   antes de que el scan inicial del DOM ocurra. Sin este defer,
+   Alpine se quejaría con "mixtoPage is not defined".
+*/
+if (document.querySelector('[x-data*="mixtoPage"]')) {
+    window.setTimeout(() => Alpine.start(), 0);
+} else {
+    Alpine.start();
+}
 
 gsap.registerPlugin(ScrollTrigger);
 

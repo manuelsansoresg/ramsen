@@ -19,10 +19,30 @@ Route::get('/', function () {
     return view('spa.select');
 })->name('spa.select');
 
-Route::get('/inicio', function () {
+/*
+|--------------------------------------------------------------------------
+| /inicio como único punto de entrada de la home
+|--------------------------------------------------------------------------
+| La splash manda al usuario a /inicio con el parámetro `experiencia`.
+| - experiencia=mixto  → la sección de servicios se reemplaza por el
+|                        partial dinámico spa._mixto-content
+| - sin parámetro      → home con servicios normales
+| - /mixto             → alias retrocompatible que redirige con el
+|                        parámetro ya puesto
+*/
+Route::get('/mixto', function () {
+    return redirect()->route('home', ['experiencia' => 'mixto']);
+})->name('spa.mixto.alias');
+
+Route::get('/inicio', function (Illuminate\Http\Request $request) {
+    $whatsapp   = '529993292148';
+    $phoneLabel = '9993 29 21 48';
+    $experiencia = $request->query('experiencia');
+
     return view('pages.home', [
-        'whatsapp' => '529993292148',
-        'phoneLabel' => '9993 29 21 48',
+        'whatsapp'   => $whatsapp,
+        'phoneLabel' => $phoneLabel,
+        'experiencia' => $experiencia,
         'upcomingExperiences' => Schema::hasTable('experiences')
             ? Experience::where('status', 'published')
                 ->orderByDesc('is_featured')

@@ -6,13 +6,14 @@
     $waUrl = "https://wa.me/{$whatsapp}?text={$waText}";
     $testimonialWaText = rawurlencode('Hola Maestro Ramcen, vi los testimonios en su sitio web y me gustaría recibir información para iniciar mi proceso.');
     $testimonialWaUrl = "https://wa.me/{$whatsapp}?text={$testimonialWaText}";
+    // Catálogo general de servicios del santuario.
     $services = [
         ['CEREMONIAS', 'Rituales privados inspirados en la tradición maya para acompañar procesos de transformación, conexión y equilibrio interior.', 'Ceremonial', 'service-ceremonies', 'M12 3.5c2.9 3 4.8 5.9 4.8 8.3A4.8 4.8 0 0 1 8.4 15c0-2.4 1.7-5.2 3.6-7.1Zm0 4.2c-.8 1.3-1.4 2.5-1.4 3.8a1.4 1.4 0 1 0 2.8 0c0-1.3-.6-2.5-1.4-3.8Z'],
         ['PISCINA', 'Una experiencia de agua, descanso y naturaleza diseñada para recuperar la energía física y mental.', 'Agua', 'service-spa', 'M4 14c2 1.7 4 1.7 6 0s4-1.7 6 0 4 1.7 6 0v3c-2 1.7-4 1.7-6 0s-4-1.7-6 0-4 1.7-6 0v-3Zm0-6c2 1.7 4 1.7 6 0s4-1.7 6 0 4 1.7 6 0v3c-2 1.7-4 1.7-6 0s-4-1.7-6 0-4 1.7-6 0V8Z'],
         ['VAPOR', 'Sesiones de vapor orientadas a la purificación, relajación y renovación corporal.', 'Vapor', 'service-steam', 'M8 16h8M6 20h12M9 12c-1.2-1.1-1.2-2.7 0-3.8 1.2-1.1 1.2-2.7 0-3.8m6 7.6c-1.2-1.1-1.2-2.7 0-3.8 1.2-1.1 1.2-2.7 0-3.8'],
         ['REPROGRAMACIÓN MENTAL', 'Acompañamiento para transformar emociones, hábitos y patrones internos hacia mayor equilibrio y claridad.', 'Mente', 'service-reprogramming', 'M9.5 19.5a3 3 0 0 1-3-3V15a3 3 0 0 1-1-5.8A3.2 3.2 0 0 1 8.4 4a3.4 3.4 0 0 1 3.1-2 3.4 3.4 0 0 1 3.1 2 3.2 3.2 0 0 1 2.9 5.2 3 3 0 0 1-1 5.8v1.5a3 3 0 0 1-3 3h-4Zm2-17v17m0-12.5a2.4 2.4 0 0 1-2.4 2.4m2.4 2.1a2.6 2.6 0 0 0-2.6 2.6m2.6-7.1a2.4 2.4 0 0 0 2.4 2.4m-2.4 2.1a2.6 2.6 0 0 1 2.6 2.6'],
         ['CAMPAMENTOS', 'Encuentros en la naturaleza para convivir, reconectar y vivir procesos de crecimiento espiritual en comunidad.', 'Naturaleza', 'service-camps', 'M3 20h18M5 20l7-16 7 16M8 20l4-8 4 8M12 12v8M9 7h6M6.5 17h11'],
-        
+
     ];
     $faqs = [
         ['¿Necesito experiencia previa?', 'No. Cada proceso se guía según tu momento, intención y apertura personal.'],
@@ -20,6 +21,9 @@
         ['¿Qué debo llevar?', 'Ropa cómoda, traje de baño si usarás piscina o vapor, agua y disposición para vivir la experiencia.'],
         ['¿Dónde está el santuario?', 'En la zona de Komchén, Yucatán. La ubicación exacta se comparte al confirmar tu visita.'],
     ];
+
+    // ¿Estamos en modo experiencia=mixto?
+    $isMixto = ($experiencia ?? null) === 'mixto';
 @endphp
 
 <main x-data="{ menuOpen: false }" class="site-shell overflow-hidden">
@@ -29,7 +33,7 @@
             <div class="hidden items-center gap-8 text-sm text-warm/72 md:flex">
                 <a class="nav-link" href="#filosofia">Filosofía</a>
                 <a class="nav-link" href="#experiencias">Servicios</a>
-                <a class="nav-link" href="#eventos">Eventos</a>
+                <a class="nav-link" href="{{ url('/inicio') }}?experiencia=mixto">Spa Mixto</a>
                 <a class="nav-link" href="#contacto">Contacto</a>
             </div>
             <a href="{{ $waUrl }}" target="_blank" class="hidden rounded-full border border-gold/40 px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gold transition hover:bg-gold hover:text-ink md:inline-flex">WhatsApp</a>
@@ -42,7 +46,7 @@
             <div class="grid gap-4 text-warm/80">
                 <a href="#filosofia" x-on:click="menuOpen = false">Filosofía</a>
                 <a href="#experiencias" x-on:click="menuOpen = false">Servicios</a>
-                <a href="#eventos" x-on:click="menuOpen = false">Eventos</a>
+                <a href="{{ url('/mixto') }}" x-on:click="menuOpen = false">Spa Mixto</a>
                 <a href="#contacto" x-on:click="menuOpen = false">Contacto</a>
             </div>
         </div>
@@ -104,44 +108,56 @@
         </div>
     </section>
 
-    <section id="experiencias" class="services-section section-ambient py-28 lg:py-40">
-        <div class="mx-auto max-w-7xl px-5 lg:px-8">
-            <div class="mx-auto max-w-5xl text-center">
-                <p class="eyebrow services-label">Servicios</p>
-                <h2 class="section-title services-title mx-auto max-w-[940px]" aria-label="Un espacio para sanar el cuerpo, la mente y el espíritu.">
-                    <span class="services-title-line">Un espacio para</span>
-                    <span class="services-title-line">sanar el cuerpo,</span>
-                    <span class="services-title-line">la mente y</span>
-                    <span class="services-title-line">el espíritu.</span>
-                </h2>
-                <p class="services-subtitle mx-auto mt-7 max-w-2xl text-lg leading-8 text-warm/66">Cada proceso es diferente. Elige el camino que mejor conecte contigo o permítenos orientarte personalmente.</p>
+    {{-- ════════════════════════════════════════════════════════════════
+         SECCIÓN DE SERVICIOS
+         - Default:          muestra la cuadrícula general de servicios.
+         - experiencia=mixto: oculta la cuadrícula y en su lugar inyecta
+           todo el contenido dinámico de mixto (timeline, microdosis,
+           afirmación, reglas, video, etc.) mediante el partial.
+         ════════════════════════════════════════════════════════════════ --}}
+    @if ($isMixto)
+        @include('spa._mixto-content')
+    @else
+        <section id="experiencias" class="services-section section-ambient py-28 lg:py-40">
+            <div class="mx-auto max-w-7xl px-5 lg:px-8">
+                <div class="mx-auto max-w-5xl text-center">
+                    <p class="eyebrow services-label">Servicios</p>
+                    <h2 class="section-title services-title mx-auto max-w-[940px]" aria-label="Un espacio para sanar el cuerpo, la mente y el espíritu.">
+                        <span class="services-title-line">Un espacio para</span>
+                        <span class="services-title-line">sanar el cuerpo,</span>
+                        <span class="services-title-line">la mente y</span>
+                        <span class="services-title-line">el espíritu.</span>
+                    </h2>
+                    <p class="services-subtitle mx-auto mt-7 max-w-2xl text-lg leading-8 text-warm/66">Cada proceso es diferente. Elige el camino que mejor conecte contigo o permítenos orientarte personalmente.</p>
+                </div>
+                <div class="services-grid mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach ($services as $item)
+                        <article class="service-card {{ $item[3] }}">
+                            <div class="service-card-image" aria-hidden="true"></div>
+                            <div class="service-card-shade" aria-hidden="true"></div>
+                            <div class="service-card-glow" aria-hidden="true"></div>
+                            <svg viewBox="0 0 24 24" class="service-icon" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="{{ $item[4] }}" />
+                            </svg>
+                            <div class="service-content">
+                                <span>{{ $item[2] }}</span>
+                                <h3>{{ $item[0] }}</h3>
+                                <p>{{ $item[1] }}</p>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+                <div class="services-cta mx-auto mt-16 max-w-3xl text-center">
+                    <h3>¿No sabes cuál experiencia elegir?</h3>
+                    <p>Cada persona vive un proceso diferente. Podemos ayudarte a encontrar el servicio más adecuado para ti.</p>
+                    <a href="{{ $waUrl }}" target="_blank" class="premium-button magnetic-button mt-8">Quiero recibir orientación</a>
+                </div>
             </div>
-            <div class="services-grid mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                @foreach ($services as $item)
-                    <article class="service-card {{ $item[3] }}">
-                        <div class="service-card-image" aria-hidden="true"></div>
-                        <div class="service-card-shade" aria-hidden="true"></div>
-                        <div class="service-card-glow" aria-hidden="true"></div>
-                        <svg viewBox="0 0 24 24" class="service-icon" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="{{ $item[4] }}" />
-                        </svg>
-                        <div class="service-content">
-                            <span>{{ $item[2] }}</span>
-                            <h3>{{ $item[0] }}</h3>
-                            <p>{{ $item[1] }}</p>
-                        </div>
-                    </article>
-                @endforeach
-            </div>
-            <div class="services-cta mx-auto mt-16 max-w-3xl text-center">
-                <h3>¿No sabes cuál experiencia elegir?</h3>
-                <p>Cada persona vive un proceso diferente. Podemos ayudarte a encontrar el servicio más adecuado para ti.</p>
-                <a href="{{ $waUrl }}" target="_blank" class="premium-button magnetic-button mt-8">Quiero recibir orientación</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
-    <x-sections.upcoming-events :events="$upcomingExperiences" :whatsapp="$whatsapp" />
+    {{-- Bloque "Próximos eventos / Vive la experiencia del santuario"
+         removido del flujo principal. Se conserva en admin si se necesita. --}}
 
     <section class="testimonials-section py-28 text-ink lg:py-40">
         <div class="mx-auto max-w-7xl px-5 lg:px-8">
@@ -230,4 +246,15 @@
 
     <a href="{{ $waUrl }}" target="_blank" class="fixed bottom-5 right-5 z-50 rounded-full bg-[#25D366] px-5 py-4 text-xs font-black uppercase tracking-[0.14em] text-ink shadow-2xl shadow-black/40 transition hover:-translate-y-1">WhatsApp</a>
 </main>
+
+{{-- Assets específicos de la experiencia mixto (solo cuando aplica) --}}
+@if ($isMixto)
+    @push('styles')
+        @vite(['resources/css/spa-mixto.css'], 'build')
+    @endpush
+
+    @push('scripts')
+        @vite(['resources/js/spa-mixto.js'], 'build')
+    @endpush
+@endif
 @endsection

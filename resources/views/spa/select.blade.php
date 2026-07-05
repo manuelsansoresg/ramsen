@@ -110,9 +110,9 @@
                     <button
                         type="button"
                         class="spa-card spa-card--mixto"
-                        data-spa-target="{{ url('/inicio') }}"
+                        data-spa-target="{{ url('/inicio') }}?experiencia=mixto"
                         data-spa-label="Spa Holístico Mixto"
-                        aria-label="Ir al inicio — Spa Holístico Mixto, hombres y mujeres"
+                        aria-label="Ir a Spa Holístico Mixto, hombres y mujeres"
                     >
                         <span class="spa-card__shine" aria-hidden="true"></span>
                         <span class="spa-card__glow" aria-hidden="true"></span>

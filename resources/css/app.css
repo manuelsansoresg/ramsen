@@ -1101,6 +1101,13 @@
             linear-gradient(145deg, #050a08, #14372b 52%, #07110e);
     }
 
+    .service-circulo .service-card-image {
+        background:
+            radial-gradient(circle at 50% 40%, rgba(197, 164, 93, .22), transparent 12rem),
+            radial-gradient(circle at 80% 80%, rgba(72, 213, 205, .18), transparent 12rem),
+            linear-gradient(145deg, #06110e, #1f3a2c 52%, #07110e);
+    }
+
     .service-card-shade {
         z-index: 1;
         background:
@@ -1179,6 +1186,12 @@
         font-size: clamp(1.46rem, 1.92vw, 1.88rem);
         line-height: 1.08;
         max-width: 18rem;
+    }
+
+    .service-circulo .service-content h3 {
+        font-size: clamp(1.52rem, 2vw, 1.95rem);
+        line-height: 1.06;
+        max-width: 100%;
     }
 
     .service-content p {
