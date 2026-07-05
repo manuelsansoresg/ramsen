@@ -6,7 +6,20 @@ use App\Models\Experience;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Route;
 
+/*
+|--------------------------------------------------------------------------
+| Home: Splash de selección Spa Holístico
+|--------------------------------------------------------------------------
+| La pantalla principal ahora es el selector de experiencia (Mixto / Solo
+| Hombres). La home anterior del sitio queda accesible desde /inicio
+| para no romper nada mientras se hace la transición.
+*/
+
 Route::get('/', function () {
+    return view('spa.select');
+})->name('spa.select');
+
+Route::get('/inicio', function () {
     return view('pages.home', [
         'whatsapp' => '529993292148',
         'phoneLabel' => '9993 29 21 48',
@@ -18,7 +31,7 @@ Route::get('/', function () {
                 ->get()
             : collect(),
     ]);
-});
+})->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

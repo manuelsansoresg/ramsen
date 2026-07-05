@@ -53,7 +53,28 @@ if (ambientAudio && ambientToggle && ambientToggleText) {
         }
     });
 
-    if (localStorage.getItem('santuarioAudioPaused') === 'true') {
+    /* ------------------------------------------------------------------
+       Autoplay solicitado desde la splash (spa-select).
+       Cuando el usuario hace click en una tarjeta de la splash, marcamos
+       `ramcen-autoplay=1` en sessionStorage. Aquí lo leemos y forzamos
+       la reproducción: el navegador reconoce el click previo en la splash
+       como interacción válida del usuario y permite el play().
+       ------------------------------------------------------------------ */
+    let requestedAutoplay = false;
+    try {
+        if (window.sessionStorage.getItem('ramcen-autoplay') === '1') {
+            window.sessionStorage.removeItem('ramcen-autoplay');
+            requestedAutoplay = true;
+        }
+    } catch (error) {
+        // sessionStorage no disponible
+    }
+
+    if (requestedAutoplay) {
+        // Pequeño delay para asegurar que el audio element está listo
+        // y que el navegador "ve" la interacción reciente.
+        window.setTimeout(() => playAmbient(true), 60);
+    } else if (localStorage.getItem('santuarioAudioPaused') === 'true') {
         setAudioState(false);
     } else {
         playAmbient(false);

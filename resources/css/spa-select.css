@@ -1,0 +1,998 @@
+/* =====================================================================
+   Spa Holístico · Pantalla de selección
+   ---------------------------------------------------------------------
+   - Sin frameworks (Tailwind/Bootstrap/Alpine/jQuery)
+   - Solo CSS moderno + keyframes
+   - Solo se anima: transform, opacity, filter, backdrop-filter
+   - No se anima: width, height, top, left, margin, padding
+   ===================================================================== */
+
+/* ------------------------------ Tokens ------------------------------ */
+:root {
+    /* Paleta solicitada */
+    --spa-ink:        #06120F;
+    --spa-forest:     #0D231E;
+    --spa-gold:       #D8B76A;
+    --spa-gold-soft:  #E4D39A;
+    --spa-warm:       rgba(255, 255, 255, .92);
+    --spa-warm-70:    rgba(255, 255, 255, .70);
+    --spa-warm-50:    rgba(255, 255, 255, .50);
+    --spa-warm-22:    rgba(255, 255, 255, .22);
+
+    /* Tipografía */
+    --spa-font-display: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif;
+    --spa-font-sans:    'Instrument Sans', ui-sans-serif, system-ui, -apple-system,
+                        'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    /* Ritmo */
+    --spa-radius-card: 18px;
+    --spa-radius-pill: 999px;
+    --spa-shadow-card: 0 30px 80px rgba(0, 0, 0, .35);
+    --spa-shadow-hover: 0 44px 130px rgba(0, 0, 0, .52), 0 0 0 1px rgba(216, 183, 106, .12);
+    --spa-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ------------------------------ Reset ------------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--spa-ink);
+    color: var(--spa-warm);
+    font-family: var(--spa-font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+::selection {
+    background: var(--spa-gold);
+    color: var(--spa-ink);
+}
+
+/* ------------------------------ Layout ------------------------------ */
+.spa-splash {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    height: 100dvh; /* fallback moderno */
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* ------------------------------ Fondo ------------------------------ */
+.spa-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/images/ramcen/spa-holistico-merida.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transform: scale(1.05);
+    transform-origin: 50% 50%;
+    will-change: transform;
+    animation: spa-zoom-bg 8s cubic-bezier(.2, .8, .2, 1) forwards;
+}
+
+@keyframes spa-zoom-bg {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1); }
+}
+
+.spa-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(6, 18, 16, .45);
+    pointer-events: none;
+}
+
+/* Viñetas superior e inferior para fundir el contenido */
+.spa-vignette {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+    height: 18vh;
+}
+
+.spa-vignette--top {
+    top: 0;
+    background: linear-gradient(180deg, rgba(6, 18, 16, .55), transparent);
+}
+
+.spa-vignette--bottom {
+    bottom: 0;
+    height: 22vh;
+    background: linear-gradient(0deg, rgba(6, 18, 16, .65), transparent);
+}
+
+/* ------------------------------ Stage ------------------------------ */
+.spa-stage {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;             /* centra vertical */
+    align-items: center;                  /* centra horizontal */
+    padding: clamp(4.5rem, 8vh, 6.5rem) clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 5vh, 4rem);
+    gap: clamp(2.2rem, 4.5vh, 3.6rem);   /* AIRE GENEROSO entre bloques */
+}
+
+/* ------------------------------ Header ------------------------------ */
+.spa-header {
+    text-align: center;
+    max-width: 62rem;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    place-items: center;                    /* centra cada hijo horizontal */
+    gap: clamp(1.2rem, 2.4vh, 1.85rem);    /* AIRE entre cada línea */
+}
+
+/* Eyebrow: BIENESTAR · EQUILIBRIO · RENOVACIÓN */
+.spa-eyebrow {
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: .55rem;
+    color: var(--spa-gold);
+    font-size: clamp(.62rem, .9vw, .78rem);
+    font-weight: 800;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    animation: spa-rise 1s .15s var(--spa-ease) both;
+}
+
+.spa-eyebrow__sep {
+    color: var(--spa-warm-50);
+    font-weight: 500;
+    transform: translateY(-1px);
+}
+
+/* Divisor con hoja */
+.spa-divider {
+    margin: .15rem auto 0;
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+    gap: .9rem;
+    color: var(--spa-gold);
+    animation: spa-rise 1s .35s var(--spa-ease) both;
+}
+
+.spa-divider__line {
+    display: inline-block;
+    width: clamp(2rem, 7vw, 4.5rem);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--spa-gold) 50%, transparent);
+    opacity: .65;
+}
+
+.spa-divider__leaf {
+    width: 22px;
+    height: 11px;
+    color: var(--spa-gold);
+    filter: drop-shadow(0 0 6px rgba(216, 183, 106, .25));
+}
+
+/* Subtítulo elegante SPA HOLÍSTICO */
+.spa-title {
+    margin: 0;
+    color: var(--spa-gold-soft);
+    font-family: var(--spa-font-display);
+    font-weight: 500;
+    font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+    letter-spacing: .45em;
+    text-indent: .45em;
+    text-transform: uppercase;
+    animation: spa-rise 1s .55s var(--spa-ease) both;
+}
+
+/* Título principal — MIXTO */
+.spa-name {
+    margin: .15rem 0 0;
+    color: var(--spa-warm);
+    font-family: var(--spa-font-display);
+    font-weight: 600;
+    font-size: clamp(3.6rem, 9.5vw, 7.4rem);
+    line-height: .92;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    animation: spa-rise-blur 1.3s .8s var(--spa-ease) both;
+    will-change: transform, opacity, filter;
+}
+
+.spa-name__word {
+    display: inline-block;
+    background: linear-gradient(180deg, #fff 0%, var(--spa-warm) 60%, var(--spa-gold-soft) 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 60px rgba(216, 183, 106, .12);
+}
+
+/* Subtítulo — HOMBRES & MUJERES */
+.spa-tag {
+    margin: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: .55rem;
+    color: var(--spa-warm-70);
+    font-size: clamp(.78rem, 1.15vw, 1.02rem);
+    font-weight: 500;
+    letter-spacing: .42em;
+    text-indent: .42em;
+    text-transform: uppercase;
+    animation: spa-rise 1s 1.15s var(--spa-ease) both;
+}
+
+.spa-tag__amp {
+    color: var(--spa-gold);
+    font-family: var(--spa-font-display);
+    letter-spacing: 0;
+    font-style: italic;
+    font-weight: 500;
+    text-indent: 0;
+    transform: translateY(-1px);
+}
+
+/* Descripción */
+.spa-description {
+    margin: .5rem auto 0;
+    max-width: 36rem;
+    width: 100%;
+    justify-self: center;
+    color: var(--spa-warm-70);
+    font-size: clamp(.9rem, 1.15vw, 1.05rem);
+    line-height: 1.65;
+    font-weight: 400;
+    animation: spa-rise 1s 1.45s var(--spa-ease) both;
+}
+
+/* ------------------------------ CTA / Tarjetas ------------------------------ */
+.spa-cta {
+    width: 100%;
+    max-width: 64rem;
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(1rem, 2.2vh, 1.6rem);
+}
+
+.spa-cta__label {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--spa-gold);
+    font-size: clamp(.65rem, .95vw, .82rem);
+    font-weight: 800;
+    letter-spacing: .36em;
+    text-indent: .36em;
+    text-transform: uppercase;
+    animation: spa-rise 1s 1.7s var(--spa-ease) both;
+}
+
+.spa-cta__line {
+    display: inline-block;
+    width: clamp(1.4rem, 5vw, 3.4rem);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--spa-gold) 50%, transparent);
+    opacity: .55;
+}
+
+.spa-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.3rem, 2.8vw, 2.2rem);   /* AIRE entre las dos tarjetas */
+}
+
+/* ------------------------------ Tarjeta ------------------------------ */
+.spa-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    color: var(--spa-warm);
+    border-radius: var(--spa-radius-card);
+    border: 1px solid rgba(228, 211, 154, .14);
+    background:
+        radial-gradient(circle at 22% 0%, rgba(216, 183, 106, .10), transparent 55%),
+        linear-gradient(165deg, rgba(13, 35, 30, .55) 0%, rgba(6, 18, 16, .55) 100%);
+    backdrop-filter: blur(14px) saturate(115%);
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
+    box-shadow: var(--spa-shadow-card);
+    transition:
+        transform .35s var(--spa-ease),
+        border-color .35s var(--spa-ease),
+        box-shadow .35s var(--spa-ease);
+    will-change: transform, opacity;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.spa-card:nth-of-type(1) { animation: spa-card-in 1.05s 1.95s var(--spa-ease) both; }
+.spa-card:nth-of-type(2) { animation: spa-card-in 1.05s 2.10s var(--spa-ease) both; }
+
+.spa-card--mixto     { --spa-card-accent: var(--spa-gold); }
+.spa-card--hombres   { --spa-card-accent: var(--spa-gold-soft); }
+
+/* Halo interior sutil al hacer hover */
+.spa-card__glow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(228, 211, 154, .10), transparent 65%);
+    opacity: 0;
+    transition: opacity .35s var(--spa-ease);
+    will-change: opacity;
+}
+
+/* Banda de luz que recorre el borde al hacer hover */
+.spa-card__shine {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity .35s var(--spa-ease);
+    will-change: opacity;
+}
+
+.spa-card__shine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55%;
+    height: 220%;
+    background: linear-gradient(
+        100deg,
+        transparent 30%,
+        rgba(228, 211, 154, .55) 50%,
+        transparent 70%
+    );
+    transform: translate3d(-120%, 0, 0) rotate(18deg);
+    transition: transform .9s var(--spa-ease);
+    will-change: transform;
+}
+
+/* Contenido interior de la tarjeta */
+.spa-card__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-rows: auto auto auto auto 1fr;
+    justify-items: center;                 /* centra cada hijo horizontal */
+    text-align: center;                    /* centra textos inline */
+    gap: clamp(.55rem, 1.2vh, .85rem);    /* AIRE dentro de cada tarjeta */
+    padding: clamp(1.4rem, 2.4vw, 2.1rem) clamp(1.4rem, 2.6vw, 2.3rem);
+    min-height: clamp(15rem, 32vh, 21rem);
+}
+
+.spa-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    color: var(--spa-card-accent, var(--spa-gold));
+    margin-bottom: clamp(.5rem, 1.4vh, 1rem);
+    transition: transform .5s var(--spa-ease);
+    will-change: transform;
+}
+
+.spa-card__icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px rgba(216, 183, 106, .18));
+}
+
+.spa-card__eyebrow {
+    color: var(--spa-gold);
+    font-size: clamp(.6rem, .8vw, .72rem);
+    font-weight: 800;
+    letter-spacing: .3em;
+    text-indent: .3em;
+    text-transform: uppercase;
+}
+
+.spa-card__title {
+    color: var(--spa-warm);
+    font-family: var(--spa-font-display);
+    font-weight: 600;
+    font-size: clamp(1.65rem, 2.4vw, 2.25rem);
+    line-height: 1.02;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+}
+
+.spa-card__sub {
+    color: var(--spa-warm-70);
+    font-size: clamp(.82rem, 1.05vw, .95rem);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.spa-card__cta {
+    align-self: end;
+    margin-top: clamp(.9rem, 2vh, 1.6rem);
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    color: var(--spa-gold-soft);
+    font-size: clamp(.7rem, .9vw, .8rem);
+    font-weight: 800;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    transition: gap .3s var(--spa-ease), color .3s var(--spa-ease);
+}
+
+.spa-card__cta svg {
+    width: 1.2rem;
+    height: .6rem;
+}
+
+/* ------------------------------ Hover/Focus ------------------------------ */
+.spa-card:hover,
+.spa-card:focus-visible {
+    transform: translate3d(0, -8px, 0) scale(1.03);
+    border-color: rgba(216, 183, 106, .55);
+    box-shadow: var(--spa-shadow-hover);
+}
+
+.spa-card:hover .spa-card__glow,
+.spa-card:focus-visible .spa-card__glow {
+    opacity: 1;
+}
+
+.spa-card:hover .spa-card__shine,
+.spa-card:focus-visible .spa-card__shine {
+    opacity: 1;
+}
+
+.spa-card:hover .spa-card__shine::before,
+.spa-card:focus-visible .spa-card__shine::before {
+    transform: translate3d(220%, 0, 0) rotate(18deg);
+}
+
+.spa-card:hover .spa-card__icon,
+.spa-card:focus-visible .spa-card__icon {
+    transform: translate3d(0, -2px, 0) rotate(2deg);
+}
+
+.spa-card:hover .spa-card__cta,
+.spa-card:focus-visible .spa-card__cta {
+    gap: .9rem;
+    color: var(--spa-gold);
+}
+
+.spa-card:focus-visible {
+    outline: 2px solid var(--spa-gold);
+    outline-offset: 4px;
+}
+
+/* Feedback de click (la JS añade la clase .is-pressed) */
+.spa-card.is-pressed {
+    transform: scale(.98);
+    transition-duration: .12s;
+}
+
+/* ------------------------------ Footer / Pilares ------------------------------ */
+.spa-pillars {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 48rem;
+    margin: 0 auto;
+    pointer-events: none;
+    animation: spa-rise 1s 2.4s var(--spa-ease) both;
+}
+
+.spa-pillars__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    flex-wrap: wrap;
+}
+
+.spa-pillar {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    color: var(--spa-warm-50);
+    font-size: clamp(.6rem, .82vw, .72rem);
+    font-weight: 800;
+    letter-spacing: .3em;
+    text-indent: .3em;
+    text-transform: uppercase;
+    transition: color .3s var(--spa-ease);
+}
+
+.spa-pillar__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--spa-gold);
+    transition: transform .35s var(--spa-ease);
+}
+
+.spa-pillar__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.spa-pillar:hover {
+    color: var(--spa-warm);
+}
+
+.spa-pillar:hover .spa-pillar__icon {
+    transform: translate3d(0, -2px, 0);
+    color: var(--spa-gold-soft);
+}
+
+/* ------------------------------ Logo ------------------------------ */
+.spa-logo {
+    position: absolute;
+    top: clamp(1rem, 2.6vh, 1.8rem);
+    left: clamp(1rem, 2.6vw, 1.8rem);
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    width: clamp(3rem, 5.5vw, 4.25rem);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    transition:
+        transform .5s var(--spa-ease),
+        filter .5s var(--spa-ease);
+    will-change: transform, filter;
+    animation: spa-logo-in 1.2s .1s var(--spa-ease) both;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.spa-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter:
+        drop-shadow(0 2px 14px rgba(6, 18, 16, .55))
+        drop-shadow(0 0 18px rgba(216, 183, 106, .12));
+    transition: filter .5s var(--spa-ease), transform .5s var(--spa-ease);
+}
+
+.spa-logo:hover,
+.spa-logo:focus-visible {
+    transform: scale(1.06);
+    outline: none;
+}
+
+.spa-logo:hover img,
+.spa-logo:focus-visible img {
+    filter:
+        drop-shadow(0 4px 22px rgba(6, 18, 16, .65))
+        drop-shadow(0 0 26px rgba(216, 183, 106, .28));
+}
+
+.spa-logo:focus-visible {
+    outline: 2px solid var(--spa-gold);
+    outline-offset: 4px;
+}
+
+@keyframes spa-logo-in {
+    from {
+        opacity: 0;
+        transform: translate3d(-10px, -8px, 0) scale(.92);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* ------------------------------ Brand ------------------------------ */
+.spa-brand {
+    position: absolute;
+    right: clamp(1rem, 2.4vw, 1.6rem);
+    bottom: clamp(.7rem, 2vh, 1.1rem);
+    z-index: 3;
+    margin: 0;
+    color: var(--spa-warm-22);
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    pointer-events: none;
+    animation: spa-rise 1s 2.6s var(--spa-ease) both;
+}
+
+/* ------------------------------ Animaciones de entrada ------------------------------ */
+@keyframes spa-rise {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+    }
+}
+
+@keyframes spa-rise-blur {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 28px, 0);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+    }
+}
+
+@keyframes spa-card-in {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 36px, 0) scale(.96);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* ------------------------------ Reduced motion ------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+    .spa-bg {
+        animation: none;
+        transform: scale(1);
+    }
+
+    .spa-eyebrow,
+    .spa-divider,
+    .spa-title,
+    .spa-name,
+    .spa-tag,
+    .spa-description,
+    .spa-cta__label,
+    .spa-card,
+    .spa-pillars,
+    .spa-brand {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .spa-card,
+    .spa-card__glow,
+    .spa-card__shine,
+    .spa-card__icon,
+    .spa-card__cta,
+    .spa-pillar,
+    .spa-pillar__icon {
+        transition: none;
+    }
+}
+
+/* ------------------------------ Responsive · Móvil ------------------------------ */
+@media (max-width: 760px) {
+
+    /* LOGO — más pequeño y mejor pegado a la esquina */
+    .spa-logo {
+        top: .65rem;
+        left: .65rem;
+        width: 2.25rem;
+    }
+
+    /* FONDO — solo móvil, anclado arriba para mostrar las hojas y dejar
+       el centro despejado para los textos */
+    .spa-bg {
+        background-image: url('/images/ramcen/spa-holistico-merida-m.png');
+        background-position: center 18%;
+        background-size: cover;
+    }
+
+    /* STAGE — centrado vertical, AIRE entre bloques */
+    .spa-stage {
+        padding: 3.5rem 1.1rem 1.2rem;
+        gap: 1.6rem;
+        justify-content: center;
+    }
+
+    /* HEADER — AIRE entre cada línea */
+    .spa-header {
+        gap: .85rem;
+    }
+
+    .spa-eyebrow {
+        font-size: .58rem;
+        letter-spacing: .26em;
+        gap: .35rem;
+    }
+
+    .spa-divider {
+        gap: .55rem;
+        margin: 0;
+    }
+
+    .spa-divider__line {
+        width: 1.6rem;
+    }
+
+    .spa-divider__leaf {
+        width: 18px;
+        height: 9px;
+    }
+
+    .spa-title {
+        font-size: clamp(.85rem, 3.2vw, 1rem);
+        letter-spacing: .38em;
+        text-indent: .38em;
+    }
+
+    .spa-name {
+        font-size: clamp(2.9rem, 13vw, 4.4rem);
+        line-height: .95;
+    }
+
+    .spa-tag {
+        font-size: clamp(.66rem, 2.6vw, .8rem);
+        letter-spacing: .3em;
+        text-indent: .3em;
+        gap: .3rem;
+    }
+
+    .spa-description {
+        max-width: 26rem;
+        font-size: .82rem;
+        line-height: 1.5;
+        margin-top: .15rem;
+    }
+
+    /* CTA — gap generoso */
+    .spa-cta {
+        gap: .85rem;
+    }
+
+    .spa-cta__label {
+        font-size: .62rem;
+        letter-spacing: .28em;
+        text-indent: .28em;
+        gap: .6rem;
+    }
+
+    .spa-cta__line {
+        width: 1.4rem;
+    }
+
+    /* TARJETAS — apiladas, AIRE generoso entre ellas */
+    .spa-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .spa-card__inner {
+        min-height: 7.8rem;
+        padding: 1.05rem 1.25rem;
+        gap: .5rem;
+    }
+
+    .spa-card__icon {
+        width: 1.85rem;
+        height: 1.85rem;
+        margin-bottom: .1rem;
+    }
+
+    .spa-card__eyebrow {
+        font-size: .56rem;
+        letter-spacing: .26em;
+    }
+
+    .spa-card__title {
+        font-size: 1.35rem;
+        letter-spacing: .02em;
+    }
+
+    .spa-card__sub {
+        font-size: .7rem;
+        letter-spacing: .12em;
+    }
+
+    .spa-card__cta {
+        margin-top: .35rem;
+        font-size: .66rem;
+        gap: .4rem;
+    }
+
+    .spa-card__cta svg {
+        width: 1rem;
+        height: .5rem;
+    }
+
+    /* PILARES — dentro del flujo flex */
+    .spa-pillars {
+        margin-top: 0;
+    }
+
+    .spa-pillars__list {
+        gap: .55rem 1.15rem;
+        justify-content: center;
+    }
+
+    .spa-pillar {
+        font-size: .54rem;
+        letter-spacing: .2em;
+        text-indent: .2em;
+        gap: .3rem;
+    }
+
+    .spa-pillar__icon {
+        width: .8rem;
+        height: .8rem;
+    }
+
+    .spa-brand {
+        display: none;
+    }
+}
+
+/* Móvil muy pequeño: ajustes finos */
+@media (max-width: 380px) {
+    .spa-logo {
+        width: 2rem;
+        top: .55rem;
+        left: .55rem;
+    }
+
+    .spa-stage {
+        padding-top: 2.75rem;
+        padding-inline: .85rem;
+    }
+
+    .spa-name {
+        font-size: clamp(2.55rem, 14vw, 3.8rem);
+    }
+
+    .spa-title {
+        font-size: .82rem;
+        letter-spacing: .3em;
+        text-indent: .3em;
+    }
+
+    .spa-tag {
+        font-size: .62rem;
+        letter-spacing: .24em;
+        text-indent: .24em;
+    }
+
+    .spa-description {
+        font-size: .76rem;
+    }
+
+    .spa-card__inner {
+        padding: .8rem 1rem;
+    }
+
+    .spa-card__title {
+        font-size: 1.2rem;
+    }
+}
+
+/* Tablets en horizontal y escritorio con poca altura */
+@media (max-height: 720px) {
+    .spa-card__inner {
+        min-height: 12rem;
+    }
+
+    .spa-header {
+        gap: .35rem;
+    }
+
+    .spa-description {
+        font-size: .85rem;
+        line-height: 1.5;
+    }
+}
+
+/* Móvil con poca altura (caso iPhone SE, etc.) */
+@media (max-width: 760px) and (max-height: 640px) {
+    .spa-stage {
+        padding-top: 2.75rem;
+        padding-bottom: .8rem;
+        gap: .55rem;
+    }
+
+    .spa-header {
+        gap: .25rem;
+    }
+
+    .spa-eyebrow,
+    .spa-title,
+    .spa-tag,
+    .spa-description {
+        display: none;
+    }
+
+    .spa-name {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+
+    .spa-cards {
+        gap: .45rem;
+    }
+
+    .spa-card__inner {
+        min-height: 5.8rem;
+        padding: .7rem 1rem;
+    }
+
+    .spa-card__icon {
+        display: none;
+    }
+
+    .spa-card__title {
+        font-size: 1.15rem;
+    }
+
+    .spa-card__sub,
+    .spa-card__cta {
+        display: none;
+    }
+
+    .spa-pillars {
+        display: none;
+    }
+}
