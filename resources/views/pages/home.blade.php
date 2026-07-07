@@ -22,8 +22,9 @@
         ['¿Dónde está el santuario?', 'En la zona de Komchén, Yucatán. La ubicación exacta se comparte al confirmar tu visita.'],
     ];
 
-    // ¿Estamos en modo experiencia=mixto?
-    $isMixto = ($experiencia ?? null) === 'mixto';
+    // ¿Estamos en modo experiencia=mixto o experiencia=temazcal-mixto?
+    $isMixto        = ($experiencia ?? null) === 'mixto';
+    $isTemazcalMixto = ($experiencia ?? null) === 'temazcal-mixto';
 @endphp
 
 <main x-data="{ menuOpen: false }" class="site-shell overflow-hidden">
@@ -110,13 +111,18 @@
 
     {{-- ════════════════════════════════════════════════════════════════
          SECCIÓN DE SERVICIOS
-         - Default:          muestra la cuadrícula general de servicios.
-         - experiencia=mixto: oculta la cuadrícula y en su lugar inyecta
+         - Default:                muestra la cuadrícula general de servicios.
+         - experiencia=mixto:      oculta la cuadrícula y en su lugar inyecta
            todo el contenido dinámico de mixto (timeline, microdosis,
            afirmación, reglas, video, etc.) mediante el partial.
+         - experiencia=temazcal-mixto: inyecta el bloque dedicado al
+           Temazcal Mixto del domingo (Dónde, Hora, 4 puertas, Convivio,
+           Donaciones, Equipo, CTA) mediante el partial.
          ════════════════════════════════════════════════════════════════ --}}
     @if ($isMixto)
         @include('spa._mixto-content')
+    @elseif ($isTemazcalMixto)
+        @include('spa._temazcal-content')
     @else
         <section id="experiencias" class="services-section section-ambient py-28 lg:py-40">
             <div class="mx-auto max-w-7xl px-5 lg:px-8">
@@ -255,6 +261,13 @@
 
     @push('scripts')
         @vite(['resources/js/spa-mixto.js'], 'build')
+    @endpush
+@endif
+
+{{-- Assets específicos de la experiencia temazcal mixto (solo cuando aplica) --}}
+@if ($isTemazcalMixto)
+    @push('styles')
+        @vite(['resources/css/spa-temazcal.css'], 'build')
     @endpush
 @endif
 @endsection

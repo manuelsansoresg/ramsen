@@ -172,6 +172,42 @@
                         </span>
                     </button>
 
+                    {{-- TARJETA 3 · TEMAZCAL MIXTO --}}
+                    <button
+                        type="button"
+                        class="spa-card spa-card--temazcal"
+                        data-spa-target="{{ url('/inicio') }}?experiencia=temazcal-mixto"
+                        data-spa-label="Temazcal Mixto"
+                        aria-label="Ir a Temazcal Mixto, domingos 9 AM"
+                    >
+                        <span class="spa-card__shine" aria-hidden="true"></span>
+                        <span class="spa-card__glow" aria-hidden="true"></span>
+
+                        <span class="spa-card__inner">
+                            <span class="spa-card__icon" aria-hidden="true">
+                                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                    {{-- Copa del temazcal con vapor saliendo --}}
+                                    <path d="M6 22h20l-2 5H8z"/>
+                                    <path d="M10 22c0-3 2.5-5 6-5s6 2 6 5"/>
+                                    <path d="M16 17V9"/>
+                                    <path d="M16 9c-1.5-2-1.5-4 0-6"/>
+                                    <path d="M16 9c1.5-2 1.5-4 0-6"/>
+                                </svg>
+                            </span>
+
+                            <span class="spa-card__eyebrow">Ceremonia maya</span>
+                            <span class="spa-card__title">Temazcal Mixto</span>
+                            <span class="spa-card__sub">Domingos &middot; 9 AM</span>
+
+                            <span class="spa-card__cta">
+                                <span>Descubrir</span>
+                                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M2 6h19M16 1l5 5-5 5"/>
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+
                 </div>
             </nav>
 

@@ -316,7 +316,15 @@ button {
 .spa-cards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.3rem, 2.8vw, 2.2rem);   /* AIRE entre las dos tarjetas */
+    gap: clamp(1.3rem, 2.8vw, 2.2rem);   /* AIRE entre las tarjetas */
+}
+
+@media (min-width: 1100px) {
+    .spa-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        max-width: 1180px;
+        margin-inline: auto;
+    }
 }
 
 /* ------------------------------ Tarjeta ------------------------------ */
@@ -346,9 +354,11 @@ button {
 
 .spa-card:nth-of-type(1) { animation: spa-card-in 1.05s 1.95s var(--spa-ease) both; }
 .spa-card:nth-of-type(2) { animation: spa-card-in 1.05s 2.10s var(--spa-ease) both; }
+.spa-card:nth-of-type(3) { animation: spa-card-in 1.05s 2.25s var(--spa-ease) both; }
 
 .spa-card--mixto     { --spa-card-accent: var(--spa-gold); }
 .spa-card--hombres   { --spa-card-accent: var(--spa-gold-soft); }
+.spa-card--temazcal  { --spa-card-accent: #c98a4b; }
 
 /* Halo interior sutil al hacer hover */
 .spa-card__glow {
@@ -441,6 +451,11 @@ button {
     line-height: 1.02;
     letter-spacing: .03em;
     text-transform: uppercase;
+    width: 100%;
+    min-height: calc(1.02em * 2);   /* reserva alto de 2 líneas */
+    display: flex;
+    align-items: center;             /* centra el texto dentro del alto reservado */
+    justify-content: center;
 }
 
 .spa-card__sub {

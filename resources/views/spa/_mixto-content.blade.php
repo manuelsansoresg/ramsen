@@ -395,12 +395,15 @@
         <div class="mixto-final__info">
             <div class="mixto-final__cell">
                 <span class="eyebrow">Cuándo</span>
-                <p>Sábados y domingos<br>11:11 AM &mdash; 11:11 PM</p>
+                <p>
+                    <strong>Sábados</strong><br>
+                    11:11 AM &mdash; 11:11 PM<br><br>
+                    <strong>Domingos</strong><br>
+                    Temazcal Mixto &middot; 9 AM<br>
+                    Spa Hol&iacute;stico de Solo Hombres &middot; 2&ndash;10 PM
+                </p>
             </div>
-            <div class="mixto-final__cell">
-                <span class="eyebrow">Dónde</span>
-                <p>Santuario del Maestro Ramcen<br>Komchén, Yucatán</p>
-            </div>
+         
             <div class="mixto-final__cell">
                 <span class="eyebrow">Donación</span>
                 <p>$100 pesos sugeridos<br>o más para seguir mejorando</p>

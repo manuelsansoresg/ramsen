@@ -1,0 +1,597 @@
+/* =====================================================================
+   Spa Holístico · Página dedicada TEMAZCAL MIXTO
+   ---------------------------------------------------------------------
+   Se monta sobre app.css (Tailwind + tokens del santuario).
+   Paleta cálida tipo tierra/carbón para diferenciar visualmente del mixto.
+   ===================================================================== */
+
+/* ---------- Tokens locales ---------- */
+:root {
+    --tz-ink:         #050a08;
+    --tz-forest:      #1a0f08;
+    --tz-clay:        #c98a4b;
+    --tz-clay-soft:   #e7b884;
+    --tz-ember:       #e07a3b;
+    --tz-warm:        #fff7e8;
+    --tz-warm-70:     rgba(255, 247, 232, .72);
+    --tz-warm-50:     rgba(255, 247, 232, .52);
+    --tz-warm-30:     rgba(255, 247, 232, .32);
+    --tz-ease:        cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ═══════════════ SHELL ═══════════════ */
+.temazcal-shell {
+    position: relative;
+    overflow-x: hidden;
+    isolation: isolate;
+    background: var(--tz-ink);
+    color: var(--tz-warm);
+}
+
+/* ═══════════════ HERO ═══════════════ */
+.temazcal-hero {
+    position: relative;
+    min-height: 78svh;
+    display: flex;
+    align-items: flex-end;
+    padding: clamp(6rem, 12vh, 9rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 6vh, 5rem);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.temazcal-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(circle at 70% 30%, rgba(224, 122, 59, .22), transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(201, 138, 75, .18), transparent 60%),
+        linear-gradient(160deg, #1a0f08 0%, #050a08 60%, #050a08 100%);
+}
+
+.temazcal-hero__particles {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.temazcal-hero__particles span {
+    position: absolute;
+    bottom: -10%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--tz-clay-soft);
+    box-shadow: 0 0 18px var(--tz-clay);
+    opacity: .55;
+    animation: tz-rise 9s linear infinite;
+}
+.temazcal-hero__particles span:nth-child(odd) { animation-duration: 11s; }
+.temazcal-hero__particles span:nth-child(3n) { width: 4px; height: 4px; opacity: .35; }
+.temazcal-hero__particles span:nth-child(5n) { width: 8px; height: 8px; opacity: .7; }
+
+@keyframes tz-rise {
+    0%   { transform: translateY(0) translateX(0); opacity: 0; }
+    10%  { opacity: .6; }
+    90%  { opacity: .4; }
+    100% { transform: translateY(-110vh) translateX(20px); opacity: 0; }
+}
+
+.temazcal-hero__inner {
+    max-width: 880px;
+}
+
+.temazcal-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .55rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(201, 138, 75, .12);
+    border: 1px solid rgba(201, 138, 75, .35);
+    color: var(--tz-clay-soft);
+    font-size: .72rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.temazcal-hero__title {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    color: var(--tz-warm);
+    margin: 0 0 1.25rem;
+    font-weight: 500;
+}
+
+.temazcal-hero__title em {
+    font-style: italic;
+    color: var(--tz-clay-soft);
+}
+
+.temazcal-hero__lead {
+    font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--tz-warm-70);
+    max-width: 720px;
+    margin: 0;
+}
+
+/* ═══════════════ SECCIÓN GENÉRICA ═══════════════ */
+.temazcal-section {
+    position: relative;
+    padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem);
+}
+
+.temazcal-section--alt {
+    background: linear-gradient(180deg, transparent 0%, rgba(201, 138, 75, .04) 50%, transparent 100%);
+}
+
+.temazcal-section__head {
+    max-width: 760px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.temazcal-section__eyebrow {
+    display: inline-block;
+    font-size: .72rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--tz-clay-soft);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.temazcal-section__title {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    color: var(--tz-warm);
+    margin: 0 0 1rem;
+    font-weight: 500;
+}
+
+.temazcal-section__intro {
+    color: var(--tz-warm-70);
+    line-height: 1.7;
+    font-size: 1.02rem;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+/* ═══════════════ DÓNDE ═══════════════ */
+.temazcal-where {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.temazcal-where__card {
+    padding: 2rem 1.75rem;
+    border-radius: 18px;
+    background: rgba(255, 247, 232, .03);
+    border: 1px solid rgba(201, 138, 75, .18);
+    backdrop-filter: blur(8px);
+}
+
+.temazcal-where__card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--tz-clay-soft);
+    margin: 0 0 .75rem;
+    font-weight: 600;
+}
+
+.temazcal-where__card p {
+    color: var(--tz-warm-70);
+    line-height: 1.65;
+    font-size: .95rem;
+    margin: 0;
+}
+
+.temazcal-where__address {
+    font-style: normal;
+    color: var(--tz-warm);
+    margin-top: .75rem;
+    display: block;
+    border-left: 2px solid var(--tz-clay);
+    padding-left: .85rem;
+}
+
+.temazcal-where__family {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+}
+
+.temazcal-where__family li {
+    padding: .55rem 0;
+    color: var(--tz-warm-70);
+    font-size: .93rem;
+    border-top: 1px solid rgba(255, 247, 232, .08);
+}
+
+.temazcal-where__family li:first-child { border-top: none; }
+
+.temazcal-where__family strong {
+    color: var(--tz-warm);
+    font-weight: 600;
+}
+
+/* ═══════════════ HORARIO / TIMELINE ═══════════════ */
+.temazcal-timeline {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.temazcal-timeline__step {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.5rem 1.75rem;
+    border-radius: 14px;
+    background: rgba(255, 247, 232, .025);
+    border: 1px solid rgba(201, 138, 75, .14);
+}
+
+.temazcal-timeline__time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--tz-clay-soft);
+    line-height: 1.2;
+}
+
+.temazcal-timeline__time small {
+    display: block;
+    font-family: inherit;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--tz-warm-50);
+    font-weight: 400;
+    margin-top: .25rem;
+}
+
+.temazcal-timeline__body h3 {
+    font-size: 1.05rem;
+    color: var(--tz-warm);
+    margin: 0 0 .4rem;
+    font-weight: 600;
+}
+
+.temazcal-timeline__body p {
+    margin: 0;
+    color: var(--tz-warm-70);
+    line-height: 1.6;
+    font-size: .93rem;
+}
+
+@media (max-width: 600px) {
+    .temazcal-timeline__step {
+        grid-template-columns: 1fr;
+        gap: .75rem;
+    }
+}
+
+/* ═══════════════ 4 PUERTAS ═══════════════ */
+.temazcal-puertas {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    max-width: 1100px;
+    margin: 0 auto;
+    counter-reset: puerta;
+}
+
+.temazcal-puerta {
+    position: relative;
+    padding: 1.75rem 1.5rem 1.5rem;
+    border-radius: 16px;
+    background: linear-gradient(160deg, rgba(201, 138, 75, .08) 0%, rgba(255, 247, 232, .025) 100%);
+    border: 1px solid rgba(201, 138, 75, .22);
+    counter-increment: puerta;
+}
+
+.temazcal-puerta::before {
+    content: counter(puerta, decimal-leading-zero);
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--tz-clay);
+    opacity: .55;
+    line-height: 1;
+}
+
+.temazcal-puerta__label {
+    font-size: .7rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--tz-clay-soft);
+    font-weight: 600;
+    margin-bottom: .55rem;
+    display: block;
+}
+
+.temazcal-puerta__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    color: var(--tz-warm);
+    margin: 0 0 .5rem;
+    font-weight: 500;
+}
+
+.temazcal-puerta__desc {
+    color: var(--tz-warm-70);
+    font-size: .88rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ═══════════════ CONVIVIO ═══════════════ */
+.temazcal-conv {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(224, 122, 59, .14), transparent 55%),
+        rgba(255, 247, 232, .03);
+    border: 1px solid rgba(201, 138, 75, .25);
+    text-align: center;
+}
+
+.temazcal-conv__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--tz-warm);
+    margin: 0 0 1rem;
+    font-weight: 500;
+}
+
+.temazcal-conv__lead {
+    color: var(--tz-warm-70);
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+    font-size: 1rem;
+}
+
+.temazcal-conv__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 1.75rem;
+    display: inline-block;
+    text-align: left;
+}
+
+.temazcal-conv__list li {
+    padding: .4rem 0 .4rem 1.5rem;
+    color: var(--tz-warm-70);
+    font-size: .95rem;
+    position: relative;
+}
+
+.temazcal-conv__list li::before {
+    content: "·";
+    position: absolute;
+    left: .35rem;
+    color: var(--tz-clay-soft);
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1;
+    top: .35rem;
+}
+
+.temazcal-conv__note {
+    color: var(--tz-warm-50);
+    font-size: .85rem;
+    margin: 0;
+    line-height: 1.6;
+    border-top: 1px dashed rgba(201, 138, 75, .25);
+    padding-top: 1.25rem;
+}
+
+/* ═══════════════ DONACIÓN / PRECIOS ═══════════════ */
+.temazcal-pricing {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.temazcal-price {
+    padding: 2rem 1.75rem;
+    border-radius: 18px;
+    background: rgba(255, 247, 232, .03);
+    border: 1px solid rgba(201, 138, 75, .18);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.temazcal-price--featured {
+    border-color: rgba(201, 138, 75, .55);
+    background:
+        radial-gradient(circle at 50% 0%, rgba(224, 122, 59, .14), transparent 60%),
+        rgba(255, 247, 232, .04);
+}
+
+.temazcal-price__eyebrow {
+    font-size: .72rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--tz-clay-soft);
+    font-weight: 600;
+}
+
+.temazcal-price__amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--tz-warm);
+    font-weight: 500;
+}
+
+.temazcal-price__amount small {
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--tz-warm-50);
+    font-weight: 400;
+    margin-left: .25rem;
+}
+
+.temazcal-price__desc {
+    color: var(--tz-warm-70);
+    line-height: 1.55;
+    font-size: .92rem;
+    margin: 0;
+}
+
+/* ═══════════════ CONTACTOS ═══════════════ */
+.temazcal-team {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.temazcal-team__person {
+    padding: 1.5rem 1.5rem 1.4rem;
+    border-radius: 14px;
+    background: rgba(255, 247, 232, .025);
+    border: 1px solid rgba(201, 138, 75, .18);
+    text-align: center;
+}
+
+.temazcal-team__role {
+    font-size: .7rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--tz-clay-soft);
+    font-weight: 600;
+    margin-bottom: .35rem;
+    display: block;
+}
+
+.temazcal-team__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--tz-warm);
+    margin: 0 0 .9rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.temazcal-team__phone {
+    display: inline-block;
+    color: var(--tz-warm);
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: .55rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(201, 138, 75, .12);
+    border: 1px solid rgba(201, 138, 75, .35);
+    transition: background .25s var(--tz-ease), transform .25s var(--tz-ease);
+}
+
+.temazcal-team__phone:hover,
+.temazcal-team__phone:focus-visible {
+    background: var(--tz-clay);
+    color: var(--tz-ink);
+    transform: translateY(-2px);
+}
+
+/* ═══════════════ CTA FINAL ═══════════════ */
+.temazcal-final {
+    text-align: center;
+    padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem) clamp(5rem, 11vw, 9rem);
+}
+
+.temazcal-final__eyebrow {
+    display: inline-block;
+    font-size: .72rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--tz-clay-soft);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.temazcal-final__title {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--tz-warm);
+    margin: 0 auto 1rem;
+    max-width: 700px;
+    line-height: 1.2;
+    font-weight: 500;
+}
+
+.temazcal-final__title em { color: var(--tz-clay-soft); font-style: italic; }
+
+.temazcal-final__desc {
+    color: var(--tz-warm-70);
+    max-width: 580px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+}
+
+.temazcal-final__cta {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .85rem;
+}
+
+.temazcal-final__button {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    background: var(--tz-clay);
+    color: var(--tz-ink);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    font-size: .82rem;
+    box-shadow: 0 18px 40px -16px rgba(201, 138, 75, .55);
+    transition: transform .3s var(--tz-ease), box-shadow .3s var(--tz-ease);
+}
+
+.temazcal-final__button:hover,
+.temazcal-final__button:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 48px -14px rgba(201, 138, 75, .75);
+}
+
+.temazcal-final__button svg { width: 18px; height: 18px; }
+
+.temazcal-final__signoff {
+    margin-top: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--tz-clay-soft);
+    font-size: 1.2rem;
+    letter-spacing: .02em;
+}

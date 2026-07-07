@@ -13,6 +13,7 @@ export default defineConfig({
                 'resources/js/spa-select.js',
                 'resources/css/spa-mixto.css',
                 'resources/js/spa-mixto.js',
+                'resources/css/spa-temazcal.css',
             ],
             refresh: true,
             fonts: [
