@@ -39,6 +39,30 @@
 @section('canonical', $seo['canonical'])
 @section('image', $seo['image'])
 
+{{-- Assets específicos de cada experiencia. Se declaran antes del contenido
+     para que el layout pueda imprimirlos dentro del <head>. --}}
+@if (($experiencia ?? null) === 'mixto')
+    @push('styles')
+        @vite(['resources/css/spa-mixto.css'], 'build')
+    @endpush
+
+    @push('scripts')
+        @vite(['resources/js/spa-mixto.js'], 'build')
+    @endpush
+@endif
+
+@if (($experiencia ?? null) === 'temazcal-mixto')
+    @push('styles')
+        @vite(['resources/css/spa-temazcal.css'], 'build')
+    @endpush
+@endif
+
+@if (($experiencia ?? null) === 'hombres')
+    @push('styles')
+        @vite(['resources/css/spa-hombres.css'], 'build')
+    @endpush
+@endif
+
 @push('schema')
     @php
         $pageSchema = [
@@ -392,29 +416,4 @@
         </svg>
     </a>
 </main>
-
-{{-- Assets específicos de la experiencia mixto (solo cuando aplica) --}}
-@if ($isMixto)
-    @push('styles')
-        @vite(['resources/css/spa-mixto.css'], 'build')
-    @endpush
-
-    @push('scripts')
-        @vite(['resources/js/spa-mixto.js'], 'build')
-    @endpush
-@endif
-
-{{-- Assets específicos de la experiencia temazcal mixto (solo cuando aplica) --}}
-@if ($isTemazcalMixto)
-    @push('styles')
-        @vite(['resources/css/spa-temazcal.css'], 'build')
-    @endpush
-@endif
-
-{{-- Assets específicos de la experiencia solo hombres (solo cuando aplica) --}}
-@if ($isHombres)
-    @push('styles')
-        @vite(['resources/css/spa-hombres.css'], 'build')
-    @endpush
-@endif
 @endsection
