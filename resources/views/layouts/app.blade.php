@@ -1,38 +1,52 @@
 <!doctype html>
 <html lang="es" class="scroll-smooth">
 <head>
+    @php
+        $pageTitle = trim($__env->yieldContent('title', 'Maestro Ramcen | Santuario espiritual, ceremonias mayas y spa holístico en Yucatán'));
+        $pageDescription = trim($__env->yieldContent('description', 'Vive una experiencia de transformación con Maestro Ramcen: ceremonias mayas, spa holístico, vapor, terapias, hipnosis y bienestar emocional en un santuario natural.'));
+        $pageCanonical = trim($__env->yieldContent('canonical', url()->current()));
+        $pageImage = trim($__env->yieldContent('image', asset('images/ramcen/spa-holistico-maestro-ramcen.png')));
+    @endphp
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Maestro Ramcen | Santuario espiritual, ceremonias mayas y spa holístico en Yucatán')</title>
-    <meta name="description" content="@yield('description', 'Vive una experiencia de transformación con Maestro Ramcen: ceremonias mayas, spa holístico, vapor, terapias, hipnosis y bienestar emocional en un santuario natural.')">
+    <title>{{ $pageTitle }}</title>
+    <meta name="description" content="{{ $pageDescription }}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ url('/') }}">
+    <link rel="canonical" href="{{ $pageCanonical }}">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Maestro Ramcen | Santuario espiritual premium">
-    <meta property="og:description" content="Ceremonias mayas, sanación holística, reprogramación mental, spa, piscina y vapor para reconectar contigo.">
-    <meta property="og:url" content="{{ url('/') }}">
-    <meta property="og:image" content="{{ asset('images/ramcen/editorial/hero-maya-sanctuary-editorial.jpg') }}">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Maestro Ramcen">
+    <meta property="og:title" content="{{ $pageTitle }}">
+    <meta property="og:description" content="{{ $pageDescription }}">
+    <meta property="og:url" content="{{ $pageCanonical }}">
+    <meta property="og:image" content="{{ $pageImage }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Maestro Ramcen | Santuario espiritual premium">
-    <meta name="twitter:description" content="Inicia un proceso de transformación interior en un santuario natural.">
-    <meta name="twitter:image" content="{{ asset('images/ramcen/editorial/hero-maya-sanctuary-editorial.jpg') }}">
+    <meta name="twitter:title" content="{{ $pageTitle }}">
+    <meta name="twitter:description" content="{{ $pageDescription }}">
+    <meta name="twitter:image" content="{{ $pageImage }}">
 
     @php
         $localBusinessSchema = [
             '@context' => 'https://schema.org',
-            '@type' => 'LocalBusiness',
+            '@type' => ['LocalBusiness', 'HealthAndBeautyBusiness'],
             'name' => 'Maestro Ramcen',
-            'image' => asset('images/ramcen/editorial/hero-maya-sanctuary-editorial.jpg'),
-            'description' => 'Santuario espiritual con ceremonias mayas, spa holístico, vapor, terapias e hipnosis.',
+            'url' => url('/'),
+            'image' => $pageImage,
+            'description' => $pageDescription,
             'telephone' => '+52 999 329 2148',
+            'priceRange' => '$$',
+            'areaServed' => ['Mérida', 'Komchén', 'Yucatán'],
             'address' => [
                 '@type' => 'PostalAddress',
                 'addressLocality' => 'Komchén',
                 'addressRegion' => 'Yucatán',
                 'addressCountry' => 'MX',
             ],
-            'sameAs' => ['https://www.facebook.com/MaestroRamcen/'],
+            'sameAs' => [
+                'https://www.facebook.com/MaestroRamcen',
+                'https://www.youtube.com/@MaestroRamcen',
+            ],
             'openingHoursSpecification' => [[
                 '@type' => 'OpeningHoursSpecification',
                 'dayOfWeek' => 'Saturday',
@@ -42,6 +56,7 @@
         ];
     @endphp
     <script type="application/ld+json">{!! json_encode($localBusinessSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    @stack('schema')
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

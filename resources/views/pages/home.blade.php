@@ -1,5 +1,105 @@
 @extends('layouts.app')
 
+@php
+    $seoPages = [
+        null => [
+            'title' => 'Maestro Ramcen | Spa holístico, temazcal y ceremonias mayas en Mérida',
+            'description' => 'Santuario en Komchén, Yucatán, con spa holístico, vapor, piscina, temazcal, ceremonias mayas y terapias para bienestar emocional y espiritual.',
+            'canonical' => route('home'),
+            'image' => asset('images/ramcen/spa-holistico-maestro-ramcen.png'),
+            'serviceName' => 'Santuario espiritual y spa holístico en Mérida',
+        ],
+        'mixto' => [
+            'title' => 'Spa holístico mixto en Mérida | Vapor, piscina y bienestar en Komchén',
+            'description' => 'Spa holístico mixto cerca de Mérida con vapor, piscina, círculo de palabra, risoterapia, campamento, masajes y reprogramación neurolingüística.',
+            'canonical' => route('spa.mixto'),
+            'image' => asset('images/ramcen/spa-holistico-merida.png'),
+            'serviceName' => 'Spa holístico mixto en Mérida',
+        ],
+        'hombres' => [
+            'title' => 'Spa solo hombres en Mérida | Vapor, piscina y masajes en Komchén',
+            'description' => 'Spa solo hombres en Komchén, Mérida. Domingos con vapor, piscina, hamacas, asador, fogata, masajes opcionales y descanso en naturaleza.',
+            'canonical' => route('spa.hombres'),
+            'image' => asset('images/ramcen/spa-holistico-merida.png'),
+            'serviceName' => 'Spa holístico solo hombres en Mérida',
+        ],
+        'temazcal-mixto' => [
+            'title' => 'Temazcal mixto en Mérida, Yucatán | Ceremonia maya en Komchén',
+            'description' => 'Temazcal mixto en Komchén, Mérida, con piedras volcánicas, hierbas de olor, 4 puertas, convivio y guía ceremonial maya los domingos.',
+            'canonical' => route('spa.temazcal'),
+            'image' => asset('images/ramcen/santuario-ceamramcen.png'),
+            'serviceName' => 'Temazcal mixto en Mérida, Yucatán',
+        ],
+    ];
+    $seo = $seoPages[$experiencia ?? null] ?? $seoPages[null];
+@endphp
+
+@section('title', $seo['title'])
+@section('description', $seo['description'])
+@section('canonical', $seo['canonical'])
+@section('image', $seo['image'])
+
+@push('schema')
+    @php
+        $pageSchema = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'Service',
+                    'name' => $seo['serviceName'],
+                    'description' => $seo['description'],
+                    'provider' => [
+                        '@type' => 'LocalBusiness',
+                        'name' => 'Maestro Ramcen',
+                        'telephone' => '+52 999 329 2148',
+                        'address' => [
+                            '@type' => 'PostalAddress',
+                            'addressLocality' => 'Komchén',
+                            'addressRegion' => 'Yucatán',
+                            'addressCountry' => 'MX',
+                        ],
+                    ],
+                    'areaServed' => [
+                        ['@type' => 'City', 'name' => 'Mérida'],
+                        ['@type' => 'AdministrativeArea', 'name' => 'Yucatán'],
+                    ],
+                    'url' => $seo['canonical'],
+                ],
+                [
+                    '@type' => 'FAQPage',
+                    'mainEntity' => [
+                        [
+                            '@type' => 'Question',
+                            'name' => '¿Dónde está el santuario de Maestro Ramcen?',
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => 'El santuario se encuentra en la zona de Komchén, Yucatán. La ubicación exacta se comparte al confirmar la reserva.',
+                            ],
+                        ],
+                        [
+                            '@type' => 'Question',
+                            'name' => '¿Cómo puedo reservar una experiencia?',
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => 'Las reservas se realizan por WhatsApp para confirmar disponibilidad, horario, intención de la visita y recomendaciones previas.',
+                            ],
+                        ],
+                        [
+                            '@type' => 'Question',
+                            'name' => '¿Necesito experiencia previa?',
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => 'No. Cada proceso se acompaña según el momento, la intención y la apertura personal de cada visitante.',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($pageSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
+
 @section('content')
 @php
     $waText = rawurlencode('Hola Maestro Ramcen, quiero agendar una experiencia en el santuario.');
@@ -36,7 +136,7 @@
             <div class="hidden items-center gap-8 text-sm text-warm/72 md:flex">
                 <a class="nav-link" href="#filosofia">Filosofía</a>
                 <a class="nav-link" href="#experiencias">Servicios</a>
-                <a class="nav-link" href="{{ url('/inicio') }}?experiencia=mixto">Spa Mixto</a>
+                <a class="nav-link" href="{{ route('spa.mixto') }}">Spa Mixto</a>
                 <a class="nav-link" href="#contacto">Contacto</a>
             </div>
             <a href="{{ $waUrl }}" target="_blank" class="hidden rounded-full border border-gold/40 px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gold transition hover:bg-gold hover:text-ink md:inline-flex">WhatsApp</a>
@@ -49,7 +149,7 @@
             <div class="grid gap-4 text-warm/80">
                 <a href="#filosofia" x-on:click="menuOpen = false">Filosofía</a>
                 <a href="#experiencias" x-on:click="menuOpen = false">Servicios</a>
-                <a href="{{ url('/mixto') }}" x-on:click="menuOpen = false">Spa Mixto</a>
+                <a href="{{ route('spa.mixto') }}" x-on:click="menuOpen = false">Spa Mixto</a>
                 <a href="#contacto" x-on:click="menuOpen = false">Contacto</a>
             </div>
         </div>
@@ -257,6 +357,34 @@
             </div>
         </div>
     </section>
+
+    <footer class="site-footer px-5 py-12 lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col gap-8 border-t border-warm/10 pt-10 md:flex-row md:items-center md:justify-between">
+            <div>
+                <a href="#inicio" class="footer-logo" aria-label="Ir al inicio de Maestro Ramcen">
+                    <img src="{{ asset('images/ramcen/logo ramcen (500 x 500 px).png') }}" alt="Maestro Ramcen" loading="lazy">
+                </a>
+                <p class="mt-3 text-sm text-warm/54">Todos los derechos reservados &copy; {{ date('Y') }} Maestro Ramcen.</p>
+            </div>
+
+            <div class="footer-socials" aria-label="Redes sociales de Maestro Ramcen">
+                <a href="https://www.facebook.com/MaestroRamcen" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Maestro Ramcen">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M14 8.7V6.8c0-.6.4-.8.8-.8H17V2.2A29 29 0 0 0 13.8 2C10.6 2 8.4 4 8.4 7.6v1.1H5v4.2h3.4V22h4.2v-9.1H16l.6-4.2H14Z" />
+                    </svg>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.youtube.com/@MaestroRamcen" target="_blank" rel="noopener noreferrer" aria-label="YouTube de Maestro Ramcen">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21.6 7.2s-.2-1.5-.9-2.2c-.9-.9-1.9-.9-2.4-1C15 3.8 12 3.8 12 3.8s-3 0-6.3.2c-.5.1-1.5.1-2.4 1-.7.7-.9 2.2-.9 2.2S2.2 9 2.2 10.8v1.7c0 1.8.2 3.6.2 3.6s.2 1.5.9 2.2c.9.9 2.1.9 2.6 1 1.9.2 6.1.2 6.1.2s3 0 6.3-.3c.5 0 1.5-.1 2.4-1 .7-.7.9-2.2.9-2.2s.2-1.8.2-3.6v-1.7c0-1.7-.2-3.5-.2-3.5ZM10.1 14.5V8.4l5.7 3.1-5.7 3Z" />
+                    </svg>
+                    <span>YouTube</span>
+                </a>
+            </div>
+
+            <p class="footer-credit">Realizado por <a href="https://www.facebook.com/profile.php?id=100068794671008" target="_blank" rel="noopener noreferrer">XpertSystems</a></p>
+        </div>
+    </footer>
 
     <a href="{{ $waUrl }}" target="_blank" aria-label="Hablar por WhatsApp" class="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl shadow-black/40 transition hover:-translate-y-1 hover:bg-[#1ebe57]">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-7 w-7">

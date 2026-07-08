@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#06120F">
     <meta name="color-scheme" content="dark">
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="index, follow">
 
-    <title>Spa Holístico · Mérida · Elige tu experiencia</title>
-    <meta name="description" content="Un espacio de bienestar integral donde el equilibrio del cuerpo, mente y espíritu se encuentran. Elige tu experiencia: spa mixto o solo hombres.">
+    <title>Spa holístico en Mérida | Maestro Ramcen en Komchén, Yucatán</title>
+    <meta name="description" content="Elige tu experiencia de bienestar en Maestro Ramcen: spa holístico mixto, spa solo hombres o temazcal mixto en Komchén, cerca de Mérida, Yucatán.">
+    <link rel="canonical" href="{{ route('spa.select') }}">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Spa holístico en Mérida | Maestro Ramcen">
+    <meta property="og:description" content="Spa holístico, vapor, piscina, temazcal y ceremonias de bienestar en Komchén, Yucatán.">
+    <meta property="og:url" content="{{ route('spa.select') }}">
+    <meta property="og:image" content="{{ asset('images/ramcen/spa-holistico-merida.png') }}">
 
     {{-- Precarga de la imagen del fondo para evitar pop-in --}}
     <link rel="preload" as="image" href="{{ asset('images/ramcen/spa-holistico-merida.png') }}" media="(min-width: 768px)">
@@ -110,7 +117,7 @@
                     <button
                         type="button"
                         class="spa-card spa-card--mixto"
-                        data-spa-target="{{ url('/inicio') }}?experiencia=mixto"
+                        data-spa-target="{{ route('spa.mixto') }}"
                         data-spa-label="Spa Holístico Mixto"
                         aria-label="Ir a Spa Holístico Mixto, hombres y mujeres"
                     >
@@ -144,7 +151,7 @@
                     <button
                         type="button"
                         class="spa-card spa-card--hombres"
-                        data-spa-target="{{ url('/inicio') }}?experiencia=hombres"
+                        data-spa-target="{{ route('spa.hombres') }}"
                         data-spa-label="Spa Holístico Solo Hombres"
                         aria-label="Ir a Spa Holístico Solo Hombres — experiencia exclusiva con Robby Mendez"
                     >
@@ -176,7 +183,7 @@
                     <button
                         type="button"
                         class="spa-card spa-card--temazcal"
-                        data-spa-target="{{ url('/inicio') }}?experiencia=temazcal-mixto"
+                        data-spa-target="{{ route('spa.temazcal') }}"
                         data-spa-label="Temazcal Mixto"
                         aria-label="Ir a Temazcal Mixto, domingos 9 AM"
                     >
