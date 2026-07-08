@@ -156,11 +156,18 @@
 <main x-data="{ menuOpen: false }" class="site-shell overflow-hidden">
     <nav class="floating-nav fixed left-1/2 top-4 z-50 w-[calc(100%-1.5rem)] max-w-6xl -translate-x-1/2 transition-all duration-500">
         <div class="nav-inner flex items-center justify-between px-5 py-4 transition-all duration-500 lg:px-6">
-            <a href="#inicio" class="font-display text-base uppercase tracking-[0.22em] text-gold">Ramcen</a>
-            <div class="hidden items-center gap-8 text-sm text-warm/72 md:flex">
+            <a href="{{ url('/') }}" class="font-display text-base uppercase tracking-[0.22em] text-gold">Ramcen</a>
+            <div class="hidden items-center gap-6 text-sm text-warm/72 lg:gap-8 md:flex">
                 <a class="nav-link" href="#filosofia">Filosofía</a>
                 <a class="nav-link" href="#experiencias">Servicios</a>
-                <a class="nav-link" href="{{ route('spa.mixto') }}">Spa Mixto</a>
+                @if($experiencia ?? null)
+                    <span class="hidden h-4 w-px bg-warm/20 lg:inline-block" aria-hidden="true"></span>
+                    <a class="nav-link {{ ($experiencia ?? null) === 'mixto' ? 'is-active' : '' }}" href="{{ route('spa.mixto') }}">Mixto</a>
+                    <a class="nav-link {{ ($experiencia ?? null) === 'hombres' ? 'is-active' : '' }}" href="{{ route('spa.hombres') }}">Solo Hombres</a>
+                    <a class="nav-link {{ ($experiencia ?? null) === 'temazcal-mixto' ? 'is-active' : '' }}" href="{{ route('spa.temazcal') }}">Temazcal</a>
+                @else
+                    <a class="nav-link" href="{{ route('spa.select') }}">Experiencias</a>
+                @endif
                 <a class="nav-link" href="#contacto">Contacto</a>
             </div>
             <a href="{{ $waUrl }}" target="_blank" class="hidden rounded-full border border-gold/40 px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-gold transition hover:bg-gold hover:text-ink md:inline-flex">WhatsApp</a>
@@ -173,7 +180,15 @@
             <div class="grid gap-4 text-warm/80">
                 <a href="#filosofia" x-on:click="menuOpen = false">Filosofía</a>
                 <a href="#experiencias" x-on:click="menuOpen = false">Servicios</a>
-                <a href="{{ route('spa.mixto') }}" x-on:click="menuOpen = false">Spa Mixto</a>
+                @if($experiencia ?? null)
+                    <div class="my-1 h-px bg-warm/10"></div>
+                    <a href="{{ route('spa.mixto') }}" x-on:click="menuOpen = false" class="{{ ($experiencia ?? null) === 'mixto' ? 'text-gold' : '' }}">Mixto</a>
+                    <a href="{{ route('spa.hombres') }}" x-on:click="menuOpen = false" class="{{ ($experiencia ?? null) === 'hombres' ? 'text-gold' : '' }}">Solo Hombres</a>
+                    <a href="{{ route('spa.temazcal') }}" x-on:click="menuOpen = false" class="{{ ($experiencia ?? null) === 'temazcal-mixto' ? 'text-gold' : '' }}">Temazcal</a>
+                    <div class="my-1 h-px bg-warm/10"></div>
+                @else
+                    <a href="{{ route('spa.select') }}" x-on:click="menuOpen = false">Experiencias</a>
+                @endif
                 <a href="#contacto" x-on:click="menuOpen = false">Contacto</a>
             </div>
         </div>
@@ -375,6 +390,11 @@
             <p class="reveal eyebrow">Contacto</p>
             <h2 class="reveal section-title mx-auto max-w-[850px]">Tu proceso empieza con un mensaje.</h2>
             <p class="reveal mx-auto mt-7 max-w-2xl text-lg leading-8 text-warm/70">Sábados de 11:11 AM a 11:11 PM. Ubicación en Komchén, Yucatán. Agenda por WhatsApp para confirmar disponibilidad.</p>
+            <div class="reveal mx-auto mt-10 max-w-3xl">
+                <a href="https://www.google.com/maps/place/21%C2%B006'15.3%22N+89%C2%B038'41.3%22W/@21.104252,-89.6473809,17z/data=!3m1!4b1!4m4!3m3!8m2!3d21.104252!4d-89.644806?entry=ttu&g_ep=EgoyMDI2MDcwNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="contact-map-image-link group block overflow-hidden rounded-2xl border border-[rgba(218,180,91,0.22)] bg-[#050706] shadow-[0_24px_60px_rgba(0,0,0,0.35)] transition hover:border-[rgba(218,180,91,0.45)]">
+                    <img src="{{ asset('mapa.png') }}" alt="Ubicación del Santuario Maestro Ramcen en Komchén, Yucatán — ver en Google Maps" class="block h-auto w-full" loading="lazy">
+                </a>
+            </div>
             <div class="reveal mt-10 flex flex-col items-center gap-4">
                 <a href="{{ $waUrl }}" target="_blank" class="premium-button magnetic-button">Hablar por WhatsApp</a>
                 <span class="text-sm uppercase tracking-[0.28em] text-gold">{{ $phoneLabel }}</span>

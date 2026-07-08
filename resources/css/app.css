@@ -98,6 +98,11 @@
         color: var(--color-gold);
     }
 
+    .nav-link.is-active {
+        color: var(--color-gold);
+        font-weight: 600;
+    }
+
     .editorial-photo {
         position: relative;
         overflow: hidden;
