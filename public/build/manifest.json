@@ -1,0 +1,127 @@
+{
+  "_ScrollTrigger-CfuogOgo.js": {
+    "file": "assets/ScrollTrigger-CfuogOgo.js",
+    "name": "ScrollTrigger"
+  },
+  "_fonts-DkuEHybc.css": {
+    "file": "assets/fonts-DkuEHybc.css",
+    "src": "_fonts-DkuEHybc.css"
+  },
+  "_instrument-sans-400-normal-D1W7dsQl.woff": {
+    "file": "assets/instrument-sans-400-normal-D1W7dsQl.woff",
+    "src": "_instrument-sans-400-normal-D1W7dsQl.woff"
+  },
+  "_instrument-sans-400-normal-DRC__1Mx.woff2": {
+    "file": "assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+    "src": "_instrument-sans-400-normal-DRC__1Mx.woff2"
+  },
+  "_instrument-sans-400-normal-Q_nF8v4l.woff2": {
+    "file": "assets/instrument-sans-400-normal-Q_nF8v4l.woff2",
+    "src": "_instrument-sans-400-normal-Q_nF8v4l.woff2"
+  },
+  "_instrument-sans-400-normal-r32jotim.woff": {
+    "file": "assets/instrument-sans-400-normal-r32jotim.woff",
+    "src": "_instrument-sans-400-normal-r32jotim.woff"
+  },
+  "_instrument-sans-500-normal-CAxz3nsc.woff": {
+    "file": "assets/instrument-sans-500-normal-CAxz3nsc.woff",
+    "src": "_instrument-sans-500-normal-CAxz3nsc.woff"
+  },
+  "_instrument-sans-500-normal-CTEe1bJa.woff2": {
+    "file": "assets/instrument-sans-500-normal-CTEe1bJa.woff2",
+    "src": "_instrument-sans-500-normal-CTEe1bJa.woff2"
+  },
+  "_instrument-sans-500-normal-Dk9ku72i.woff2": {
+    "file": "assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+    "src": "_instrument-sans-500-normal-Dk9ku72i.woff2"
+  },
+  "_instrument-sans-500-normal-Z6ESRlEs.woff": {
+    "file": "assets/instrument-sans-500-normal-Z6ESRlEs.woff",
+    "src": "_instrument-sans-500-normal-Z6ESRlEs.woff"
+  },
+  "_instrument-sans-600-normal-B7fBEWYG.woff2": {
+    "file": "assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+    "src": "_instrument-sans-600-normal-B7fBEWYG.woff2"
+  },
+  "_instrument-sans-600-normal-B9e8oLYv.woff": {
+    "file": "assets/instrument-sans-600-normal-B9e8oLYv.woff",
+    "src": "_instrument-sans-600-normal-B9e8oLYv.woff"
+  },
+  "_instrument-sans-600-normal-BsaQcF38.woff2": {
+    "file": "assets/instrument-sans-600-normal-BsaQcF38.woff2",
+    "src": "_instrument-sans-600-normal-BsaQcF38.woff2"
+  },
+  "_instrument-sans-600-normal-DMks36a2.woff": {
+    "file": "assets/instrument-sans-600-normal-DMks36a2.woff",
+    "src": "_instrument-sans-600-normal-DMks36a2.woff"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BzcZNsqB.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/spa-hombres.css": {
+    "file": "assets/spa-hombres-Gl9OqFA2.css",
+    "name": "spa-hombres",
+    "names": [
+      "spa-hombres.css"
+    ],
+    "src": "resources/css/spa-hombres.css",
+    "isEntry": true
+  },
+  "resources/css/spa-mixto.css": {
+    "file": "assets/spa-mixto-tHGs8mF_.css",
+    "name": "spa-mixto",
+    "names": [
+      "spa-mixto.css"
+    ],
+    "src": "resources/css/spa-mixto.css",
+    "isEntry": true
+  },
+  "resources/css/spa-select.css": {
+    "file": "assets/spa-select-CL7jPlQ_.css",
+    "name": "spa-select",
+    "names": [
+      "spa-select.css"
+    ],
+    "src": "resources/css/spa-select.css",
+    "isEntry": true
+  },
+  "resources/css/spa-temazcal.css": {
+    "file": "assets/spa-temazcal-D_xbVEs3.css",
+    "name": "spa-temazcal",
+    "names": [
+      "spa-temazcal.css"
+    ],
+    "src": "resources/css/spa-temazcal.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-D6YstPqW.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_ScrollTrigger-CfuogOgo.js"
+    ]
+  },
+  "resources/js/spa-mixto.js": {
+    "file": "assets/spa-mixto-BIi_J6XD.js",
+    "name": "spa-mixto",
+    "src": "resources/js/spa-mixto.js",
+    "isEntry": true,
+    "imports": [
+      "_ScrollTrigger-CfuogOgo.js"
+    ]
+  },
+  "resources/js/spa-select.js": {
+    "file": "assets/spa-select-D5s_srrf.js",
+    "name": "spa-select",
+    "src": "resources/js/spa-select.js",
+    "isEntry": true
+  }
+}
