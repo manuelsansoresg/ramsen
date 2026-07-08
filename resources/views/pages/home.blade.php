@@ -22,9 +22,11 @@
         ['¿Dónde está el santuario?', 'En la zona de Komchén, Yucatán. La ubicación exacta se comparte al confirmar tu visita.'],
     ];
 
-    // ¿Estamos en modo experiencia=mixto o experiencia=temazcal-mixto?
+    // ¿Estamos en modo experiencia=mixto, experiencia=temazcal-mixto
+    // o experiencia=hombres (Robby Mendez)?
     $isMixto        = ($experiencia ?? null) === 'mixto';
     $isTemazcalMixto = ($experiencia ?? null) === 'temazcal-mixto';
+    $isHombres      = ($experiencia ?? null) === 'hombres';
 @endphp
 
 <main x-data="{ menuOpen: false }" class="site-shell overflow-hidden">
@@ -60,9 +62,9 @@
         </picture>
         <div class="hero-depth absolute inset-0"></div>
         <div class="ambient-light absolute inset-0"></div>
-        <div class="hero-bokeh absolute inset-0" aria-hidden="true">
-            @for ($i = 1; $i <= 40; $i++)
-                <span></span>
+        <div class="hero-particles absolute inset-0" aria-hidden="true">
+            @for ($i = 0; $i < 42; $i++)
+                <span style="left: {{ number_format(($i * 2.38) + (($i * 7) % 11) * 0.55, 2) }}%; animation-delay: {{ number_format(($i * 0.21) % 9, 2) }}s;"></span>
             @endfor
         </div>
         <div class="particle-field absolute inset-0" aria-hidden="true"></div>
@@ -118,11 +120,17 @@
          - experiencia=temazcal-mixto: inyecta el bloque dedicado al
            Temazcal Mixto del domingo (Dónde, Hora, 4 puertas, Convivio,
            Donaciones, Equipo, CTA) mediante el partial.
+         - experiencia=hombres:    inyecta el bloque dedicado al Spa Solo
+           Hombres con Robby Mendez (splash, qué incluye, reglas, horarios,
+           donación sugerida, opcionales, masajes, video y contacto) mediante
+           el partial.
          ════════════════════════════════════════════════════════════════ --}}
     @if ($isMixto)
         @include('spa._mixto-content')
     @elseif ($isTemazcalMixto)
         @include('spa._temazcal-content')
+    @elseif ($isHombres)
+        @include('spa._hombres-content')
     @else
         <section id="experiencias" class="services-section section-ambient py-28 lg:py-40">
             <div class="mx-auto max-w-7xl px-5 lg:px-8">
@@ -250,7 +258,11 @@
         </div>
     </section>
 
-    <a href="{{ $waUrl }}" target="_blank" class="fixed bottom-5 right-5 z-50 rounded-full bg-[#25D366] px-5 py-4 text-xs font-black uppercase tracking-[0.14em] text-ink shadow-2xl shadow-black/40 transition hover:-translate-y-1">WhatsApp</a>
+    <a href="{{ $waUrl }}" target="_blank" aria-label="Hablar por WhatsApp" class="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl shadow-black/40 transition hover:-translate-y-1 hover:bg-[#1ebe57]">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-7 w-7">
+            <path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.5-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.3c1.4.8 3 1.3 4.7 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>
+        </svg>
+    </a>
 </main>
 
 {{-- Assets específicos de la experiencia mixto (solo cuando aplica) --}}
@@ -268,6 +280,13 @@
 @if ($isTemazcalMixto)
     @push('styles')
         @vite(['resources/css/spa-temazcal.css'], 'build')
+    @endpush
+@endif
+
+{{-- Assets específicos de la experiencia solo hombres (solo cuando aplica) --}}
+@if ($isHombres)
+    @push('styles')
+        @vite(['resources/css/spa-hombres.css'], 'build')
     @endpush
 @endif
 @endsection

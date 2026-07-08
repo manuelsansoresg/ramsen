@@ -144,9 +144,9 @@
                     <button
                         type="button"
                         class="spa-card spa-card--hombres"
-                        data-spa-target="{{ url('/inicio') }}"
+                        data-spa-target="{{ url('/inicio') }}?experiencia=hombres"
                         data-spa-label="Spa Holístico Solo Hombres"
-                        aria-label="Ir al inicio — Spa Holístico Solo Hombres, experiencia exclusiva"
+                        aria-label="Ir a Spa Holístico Solo Hombres — experiencia exclusiva con Robby Mendez"
                     >
                         <span class="spa-card__shine" aria-hidden="true"></span>
                         <span class="spa-card__glow" aria-hidden="true"></span>

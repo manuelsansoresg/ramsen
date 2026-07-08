@@ -175,233 +175,54 @@
         mix-blend-mode: screen;
     }
 
-    .hero-bokeh {
+    .hero-particles {
         z-index: 1;
         pointer-events: none;
         overflow: hidden;
         mix-blend-mode: screen;
-        opacity: .9;
+        opacity: .95;
     }
 
-    .hero-bokeh span {
+    .hero-particles span {
         position: absolute;
-        display: block;
-        border-radius: 999px;
-        background: radial-gradient(circle, rgba(255, 247, 232, .62), rgba(222, 198, 112, .24) 42%, rgba(107, 154, 99, .12) 68%, transparent 100%);
-        filter: blur(18px);
-        opacity: .07;
-        animation: heroBokehDrift 18s ease-in-out infinite;
-        --bokeh-x1: 0px;
-        --bokeh-y1: 0px;
-        --bokeh-x2: 18px;
-        --bokeh-y2: -24px;
-        --bokeh-x3: -10px;
-        --bokeh-y3: 12px;
+        bottom: -8%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--color-gold, #c5a45d);
+        box-shadow:
+            0 0 8px rgba(197, 164, 93, .85),
+            0 0 18px rgba(197, 164, 93, .55),
+            0 0 32px rgba(224, 122, 59, .25);
+        opacity: .55;
+        animation: heroRise 9s linear infinite;
         will-change: transform, opacity;
     }
 
-    .hero-bokeh span:nth-child(1) {
-        left: 28%;
-        top: 12%;
-        width: 58px;
-        height: 58px;
-        animation-duration: 22s;
-        animation-delay: -3s;
-        --bokeh-x2: 26px;
-        --bokeh-y2: -28px;
-        --bokeh-x3: -14px;
-        --bokeh-y3: 18px;
-    }
+    .hero-particles span:nth-child(odd)  { animation-duration: 11s; }
+    .hero-particles span:nth-child(3n)   { width: 3.5px; height: 3.5px; opacity: .35; animation-duration: 7.5s; }
+    .hero-particles span:nth-child(5n)   { width: 7px;   height: 7px;   opacity: .75; animation-duration: 13s; }
+    .hero-particles span:nth-child(7n)   { background: #e07a3b; box-shadow: 0 0 10px rgba(224, 122, 59, .9), 0 0 24px rgba(224, 122, 59, .45); }
+    .hero-particles span:nth-child(11n)  { width: 4px;   height: 4px;   opacity: .45; animation-duration: 16s; }
 
-    .hero-bokeh span:nth-child(2) {
-        left: 39%;
-        top: 21%;
-        width: 34px;
-        height: 34px;
-        animation-duration: 16s;
-        animation-delay: -8s;
-        filter: blur(16px);
-        --bokeh-x2: -22px;
-        --bokeh-y2: 18px;
-        --bokeh-x3: 14px;
-        --bokeh-y3: -10px;
-    }
-
-    .hero-bokeh span:nth-child(3) {
-        left: 52%;
-        top: 15%;
-        width: 48px;
-        height: 48px;
-        animation-duration: 25s;
-        animation-delay: -11s;
-        --bokeh-x2: 32px;
-        --bokeh-y2: 14px;
-        --bokeh-x3: -18px;
-        --bokeh-y3: -20px;
-    }
-
-    .hero-bokeh span:nth-child(4) {
-        left: 66%;
-        top: 26%;
-        width: 24px;
-        height: 24px;
-        animation-duration: 14s;
-        animation-delay: -5s;
-        opacity: .06;
-        filter: blur(13px);
-        --bokeh-x2: -16px;
-        --bokeh-y2: -22px;
-        --bokeh-x3: 12px;
-        --bokeh-y3: 16px;
-    }
-
-    .hero-bokeh span:nth-child(5) {
-        left: 74%;
-        top: 18%;
-        width: 42px;
-        height: 42px;
-        animation-duration: 21s;
-        animation-delay: -14s;
-        --bokeh-x2: 24px;
-        --bokeh-y2: -16px;
-        --bokeh-x3: -20px;
-        --bokeh-y3: 22px;
-    }
-
-    .hero-bokeh span:nth-child(6) {
-        left: 58%;
-        top: 42%;
-        width: 18px;
-        height: 18px;
-        animation-duration: 12s;
-        animation-delay: -2s;
-        opacity: .05;
-        filter: blur(11px);
-        --bokeh-x2: 18px;
-        --bokeh-y2: 20px;
-        --bokeh-x3: -12px;
-        --bokeh-y3: -18px;
-    }
-
-    .hero-bokeh span:nth-child(7) {
-        left: 47%;
-        top: 33%;
-        width: 60px;
-        height: 60px;
-        animation-duration: 24s;
-        animation-delay: -17s;
-        opacity: .08;
-        filter: blur(22px);
-        --bokeh-x2: -30px;
-        --bokeh-y2: 22px;
-        --bokeh-x3: 20px;
-        --bokeh-y3: -24px;
-    }
-
-    .hero-bokeh span:nth-child(8) {
-        left: 82%;
-        top: 37%;
-        width: 28px;
-        height: 28px;
-        animation-duration: 18s;
-        animation-delay: -9s;
-        opacity: .06;
-        filter: blur(14px);
-        --bokeh-x2: -20px;
-        --bokeh-y2: -18px;
-        --bokeh-x3: 14px;
-        --bokeh-y3: 20px;
-    }
-
-    .hero-bokeh span:nth-child(9) {
-        left: 34%;
-        top: 43%;
-        width: 20px;
-        height: 20px;
-        animation-duration: 15s;
-        animation-delay: -6s;
-        filter: blur(12px);
-        --bokeh-x2: 16px;
-        --bokeh-y2: -14px;
-        --bokeh-x3: -18px;
-        --bokeh-y3: 10px;
-    }
-
-    .hero-bokeh span:nth-child(10) {
-        left: 62%;
-        top: 8%;
-        width: 12px;
-        height: 12px;
-        animation-duration: 10s;
-        animation-delay: -1s;
-        opacity: .05;
-        filter: blur(9px);
-        --bokeh-x2: -14px;
-        --bokeh-y2: 12px;
-        --bokeh-x3: 16px;
-        --bokeh-y3: -16px;
-    }
-
-    .hero-bokeh span:nth-child(11) {
-        left: 71%;
-        top: 51%;
-        width: 36px;
-        height: 36px;
-        animation-duration: 20s;
-        animation-delay: -12s;
-        opacity: .07;
-        --bokeh-x2: 28px;
-        --bokeh-y2: 18px;
-        --bokeh-x3: -16px;
-        --bokeh-y3: -22px;
-    }
-
-    .hero-bokeh span:nth-child(12) {
-        left: 43%;
-        top: 7%;
-        width: 46px;
-        height: 46px;
-        animation-duration: 23s;
-        animation-delay: -19s;
-        opacity: .08;
-        --bokeh-x2: -26px;
-        --bokeh-y2: -20px;
-        --bokeh-x3: 18px;
-        --bokeh-y3: 14px;
-    }
-
-    @keyframes heroBokehDrift {
-        0% {
-            opacity: .05;
-            transform: translate3d(var(--bokeh-x1), var(--bokeh-y1), 0) scale(1);
-        }
-
-        35% {
-            opacity: .11;
-            transform: translate3d(var(--bokeh-x2), var(--bokeh-y2), 0) scale(1.05);
-        }
-
-        70% {
-            opacity: .07;
-            transform: translate3d(calc(var(--bokeh-x3) * .7), calc(var(--bokeh-y3) * .7), 0) scale(.99);
-        }
-
-        100% {
-            opacity: .06;
-            transform: translate3d(var(--bokeh-x3), var(--bokeh-y3), 0) scale(1.02);
-        }
+    @keyframes heroRise {
+        0%   { transform: translate3d(0, 0, 0);            opacity: 0; }
+        8%   { opacity: .75; }
+        50%  { transform: translate3d(8px, -55vh, 0);      opacity: .85; }
+        92%  { opacity: .35; }
+        100% { transform: translate3d(-12px, -112vh, 0);   opacity: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .hero-bokeh span,
+        .hero-particles,
         .particle-field,
         .ambient-audio-button.is-playing span:first-child {
             animation: none;
             transform: none;
         }
 
-        .hero-bokeh span {
-            opacity: .06;
+        .hero-particles {
+            opacity: .35;
         }
 
         .particle-field {

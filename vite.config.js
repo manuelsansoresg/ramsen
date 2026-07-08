@@ -14,6 +14,7 @@ export default defineConfig({
                 'resources/css/spa-mixto.css',
                 'resources/js/spa-mixto.js',
                 'resources/css/spa-temazcal.css',
+                'resources/css/spa-hombres.css',
             ],
             refresh: true,
             fonts: [
